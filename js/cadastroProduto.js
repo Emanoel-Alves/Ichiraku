@@ -1,35 +1,27 @@
-function updateImageDisplay() {
-  while (preview.firstChild) {
-    preview.removeChild(preview.firstChild);
-  }
+var id = 0;
 
-  const curFiles = input.files;
-  if (curFiles.length === 0) {
-    const para = document.createElement("p");
-    para.textContent = "No files currently selected for upload";
-    preview.appendChild(para);
-  } else {
-    const list = document.createElement("ol");
-    preview.appendChild(list);
+function adicionar() {
+  var inputs = document.getElementsByClassName("entrada");
+  id++;
 
-    for (const file of curFiles) {
-      const listItem = document.createElement("li");
-      const para = document.createElement("p");
-      if (validFileType(file)) {
-        para.textContent = `File name ${file.name}, file size ${returnFileSize(
-          file.size
-        )}.`;
-        const image = document.createElement("img");
-        image.src = URL.createObjectURL(file);
+  console.log();
+  document.getElementById("lista_produtos").innerHTML += `
+  <div class="Pratos" id="${id}">
 
-        listItem.appendChild(image);
-        listItem.appendChild(para);
-      } else {
-        para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
-        listItem.appendChild(para);
-      }
+  <div>
+  <img src="../img/${inputs["imagem"].files[0].name}" alt="" />
+    <div class="informacoes">
+    <p>${inputs["nome"].value}</p>
+    <p>${inputs["ingredientes"].value}</p>
+    <p><strong>Categoria:</strong> ${inputs["categoria"].value}</p>
+    </div>
+    <p>R$ ${inputs["preco"].value}</p> 
 
-      list.appendChild(listItem);
-    }
-  }
+    <button onclick="deletar(${id})" > Deletar </button>
+  </div>
+</div>`;
+}
+
+function deletar(id) {
+  document.getElementById(id).remove();
 }

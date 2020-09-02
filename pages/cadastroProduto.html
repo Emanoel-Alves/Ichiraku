@@ -21,89 +21,65 @@
     <div class="main">
       <div class="sloganBox">
         <div class="slogan">
-          <h2>ICHIRAKU</h2>
+          <a
+            ><img
+              src="https://fontmeme.com/permalink/200902/3f1ed0925d836682782312739f0fc4c3.png"
+              alt="naruto-font"
+              border="0"
+          /></a>
           <img class="imagemSlogan" src="../img/lamen.png" alt="" />
         </div>
       </div>
 
       <form action="" class="formulario">
         <label class="inputImag" for=""
+          >Imagem do produto:
+          <input
+            name="imagem"
+            class="file_customizado entrada"
+            type="file"
+            accept="image/*"
+        /></label>
+        <label for=""
           >Nome do prato:
-          <input class="file_customizado" type="file" accept="image/*"
+          <input
+            class="entrada"
+            name="nome"
+            placeholder="Sushi, Shimeji na Manteiga, ..."
+            type="text"
         /></label>
         <label for=""
           >Ingredientes:
-          <input placeholder="Tomate, Cebola, Pimenta, ..." type="text"
-        /></label>
-        <label for="">Preço: <input placeholder="0.00" type="text" /></label>
-        <label for=""
-          >Tipo:
           <input
-            placeholder="Carne vermelha, Frango, Salada, Sobremesa, ... "
+            class="entrada"
+            name="ingredientes"
+            placeholder="Arroz Para Sushi,  Linguado, Tilápia, Atum, ..."
+            type="text"
+        /></label>
+        <label for=""
+          >Preço R$:
+          <input class="entrada" name="preco" placeholder="0,00" type="text"
+        /></label>
+        <label for=""
+          >Categoria:
+          <input
+            required
+            class="entrada"
+            name="categoria"
+            placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
             type="text"
         /></label>
 
-        <input class="Add_produto" type="submit" />
+        <input
+          onclick="adicionar()"
+          value="Cadastrar"
+          class="add_produto"
+          type="button"
+        />
       </form>
 
-      <div class="lista_produtos">
+      <div class="lista_produtos" id="lista_produtos">
         <p>Produtos</p>
-
-        <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
       </div>
     </div>
   </body>
