@@ -1,35 +1,18 @@
-function updateImageDisplay() {
-  while (preview.firstChild) {
-    preview.removeChild(preview.firstChild);
-  }
+function adicionar() {
+  var inputs = document.getElementsByClassName("entrada");
 
-  const curFiles = input.files;
-  if (curFiles.length === 0) {
-    const para = document.createElement("p");
-    para.textContent = "No files currently selected for upload";
-    preview.appendChild(para);
-  } else {
-    const list = document.createElement("ol");
-    preview.appendChild(list);
+  document.getElementById("lista_produtos").innerHTML += `<div class="Pratos">
+  
 
-    for (const file of curFiles) {
-      const listItem = document.createElement("li");
-      const para = document.createElement("p");
-      if (validFileType(file)) {
-        para.textContent = `File name ${file.name}, file size ${returnFileSize(
-          file.size
-        )}.`;
-        const image = document.createElement("img");
-        image.src = URL.createObjectURL(file);
+  <div>
+  <img src="../img/img1.png" alt="" />
+    <div class="informacoes">
+    <p>${inputs["nome"].value}</p>
+    <p>${inputs["ingredientes"].value}</p>
+    </div>
+    <p>R$ ${inputs["preco"].value}</p> 
 
-        listItem.appendChild(image);
-        listItem.appendChild(para);
-      } else {
-        para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
-        listItem.appendChild(para);
-      }
-
-      list.appendChild(listItem);
-    }
-  }
+    <button href="../pages/InfoPrato.html"> Deletar </button>
+  </div>
+</div>`;
 }
