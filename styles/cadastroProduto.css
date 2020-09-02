@@ -37,14 +37,14 @@
 
 .formulario {
   display: flex;
-  width: 70%;
+  width: 60%;
   height: 50%;
   background-color: #e5e5e5;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 .imagemSlogan {
@@ -59,7 +59,6 @@
 }
 
 .inputImag > input {
-  /* padding-top: 2px; */
   padding-left: 0px;
 }
 
@@ -75,10 +74,15 @@
   background-color: #156711;
   color: #fff;
   width: 110px;
-  /* margin-top: 20px;/ */
   text-align: center;
   padding: 0px;
   margin: 20px;
+  outline-color: #e5e5e5;
+}
+
+.add_produto:hover {
+  outline-color: #156711;
+  border: 2px solid #e5e5e5;
 }
 
 input {
@@ -95,13 +99,13 @@ input {
 
 .lista_produtos {
   display: flex;
-  width: 70%;
+  width: 60%;
   height: 100%;
   background-color: #e5e5e5;
   flex-wrap: wrap;
   align-items: center;
   margin: 20px;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -110,10 +114,11 @@ input {
 .lista_produtos > p {
   width: 100%;
   text-align: center;
+  font-size: 25px;
 }
 
 label {
-  width: 50%;
+  width: 70%;
   margin-top: 10px;
   font-family: "Roboto", sans-serif;
 }
@@ -131,21 +136,14 @@ label {
   justify-content: space-evenly;
   align-items: center;
 }
-.informacoes {
-  display: flex;
-  flex-direction: column;
-}
+
 .Pratos img {
   width: 130px;
   height: 130px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 8px;
-}
-
-.Pratos div h3,
-h4 {
-  margin: 8px 0;
+  margin-left: 10px;
 }
 
 .Pratos div button {
@@ -166,4 +164,31 @@ h4 {
 .Pratos div button:hover {
   background-color: #b40707;
   border: 0.7px solid #b40707;
+}
+.Pratos > div > button {
+  margin-right: 15px;
+}
+
+.Pratos > div > p {
+  margin-right: 15px;
+  flex-direction: row;
+  width: 20%;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.informacoes {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 15px;
+}
+
+.informacoes > p {
+  margin-bottom: 0px;
+}
+
+.informacoes > p:nth-child(1) {
+  font-weight: bold;
+  font-size: 18px;
 }
