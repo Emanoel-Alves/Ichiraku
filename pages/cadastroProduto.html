@@ -33,7 +33,7 @@
 
       <form action="" class="formulario">
         <label class="inputImag" for=""
-          >Imagem do produto:
+          >Imagem do produto *
           <input
             name="imagem"
             class="file_customizado entrada"
@@ -41,7 +41,7 @@
             accept="image/*"
         /></label>
         <label for=""
-          >Nome do prato:
+          >Nome do prato *
           <input
             class="entrada"
             name="nome"
@@ -49,7 +49,7 @@
             type="text"
         /></label>
         <label for=""
-          >Ingredientes:
+          >Ingredientes *
           <input
             class="entrada"
             name="ingredientes"
@@ -57,11 +57,11 @@
             type="text"
         /></label>
         <label for=""
-          >Preço R$:
+          >Preço R$ *
           <input class="entrada" name="preco" placeholder="0,00" type="text"
         /></label>
-        <label for=""
-          >Categoria:
+        <label id="categoria" for=""
+          >Categoria *
           <input
             required
             class="entrada"
@@ -69,12 +69,14 @@
             placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
             type="text"
         /></label>
+        <div id="alerta"></div>
 
         <input
           onclick="adicionar()"
           value="Cadastrar"
           class="add_produto"
           type="button"
+          id="button_adc"
         />
       </form>
 
