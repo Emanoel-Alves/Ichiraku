@@ -5,8 +5,8 @@ Repositorio destinado para o desenvolvimento do sistema de restaurante Ichiraku
 # Integrantes
 
 - Emanoel Bezerra Alves
-<br> - Luis Henrique Catunda Rodrigues Farias
-<br> - Lais Cristina Gomes Melo
+ - Luis Henrique Catunda Rodrigues Farias
+- Lais Cristina Gomes Melo
   
 # Descrição
 Sistema web para restaurantes delivery. O sistema possuirá funcionalidades de escolha de produtos, listagem de produtos, acompanhamento do pedido, login, cadastro e configurações de conta, entre outras.
