@@ -11,8 +11,6 @@ Repositorio destinado para o desenvolvimento do sistema de restaurante Ichiraku
 # Descrição
 Sistema web para restaurantes delivery. O sistema possuirá funcionalidades de escolha de produtos, listagem de produtos, acompanhamento do pedido, login, cadastro e configurações de conta, entre outras.
 
----------------------------------------------------------------------------------------------------
-
 # Modelagem de Dados
 <ul>
   <li><strong>Usuário: </strong> id, email, senha, imagem, endereço, cpf, </li>
