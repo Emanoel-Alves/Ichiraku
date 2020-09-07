@@ -3,6 +3,7 @@ Repositorio destinado para o desenvolvimento do sistema de restaurante Ichiraku
 <br>Esse sistema tem como objetivo atender a disciplina de desenvolvimento web
 
 # Integrantes
+
 - Emanoel Bezerra Alves
 <br> - Luis Henrique Catunda Rodrigues Farias
 <br> - Lais Cristina Gomes Melo
