@@ -14,6 +14,6 @@ Sistema web para restaurantes delivery.O sistema possuirá funcionalidades de es
 
 <h4>Modelagem de Dados</h4>
 <ul>
-  <li>**Usuário: ** id, email, senha, imagem, endereço, cpf, </li>
-  <li>**Produto: **, imagem, nomeProduto, ingredientes, valor, classificação</li>
+  <li>**Usuário:** id, email, senha, imagem, endereço, cpf, </li>
+  <li>**Produto:**, imagem, nomeProduto, ingredientes, valor, classificação</li>
 </ul>  
