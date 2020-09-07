@@ -4,7 +4,7 @@ Repositorio destinado para o desenvolvimento do sistema de restaurante Ichiraku
 
 # Integrantes
 
-- Emanoel Bezerra Alves
+<br> - Emanoel Bezerra Alves
 <br> - Luis Henrique Catunda Rodrigues Farias
 <br> - Lais Cristina Gomes Melo
   
