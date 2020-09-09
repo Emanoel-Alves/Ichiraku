@@ -14,7 +14,7 @@ function cadastrar(){
         
         else {
             document.getElementById("cad").onclick = function () {
-            location.href = "ichiraku.html";
+            location.href = "home.html";
         
             
         }
