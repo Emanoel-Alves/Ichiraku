@@ -1,39 +1,7 @@
 <template>
   <div class="Conteine">
-    <div class="Menu">
-      <div class="infoPerfil">
-        <img src="../assets/logo.png" alt="" class="img1" />
-
-        <img src="../assets/user.png" alt="Imagem perfil" class="img2" />
-
-        <h4>Nome do usuário</h4>
-      </div>
-
-      <div class="infoMenu">
-        <div class="OpcoesMenu">
-          <a href="">
-            <img src="../assets/login.png" width="20px" alt="" /> Perfil
-          </a>
-
-          <a href="">
-            <img src="../assets/cesta.png" width="20px" alt="" /> Cesta
-          </a>
-
-          <a href="">
-            <img src="../assets/combo.png" width="18px" alt="" /> Combos
-          </a>
-
-          <a href="../pages/opcoesDoDia.html">
-            <img src="../assets/menu.png" width="20px" alt="" /> Cardápio
-          </a>
-
-          <a href="">
-            <img src="../assets/delivery-truck.png" width="23px" alt="" />
-            Perdido
-          </a>
-        </div>
-      </div>
-    </div>
+    
+    <Menu/>
 
     <section>
       <div class="Info">
@@ -52,11 +20,13 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import Menu from "@/components/Menu.vue";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Menu,
+    HelloWorld
   },
 };
 </script>
