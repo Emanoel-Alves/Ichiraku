@@ -1,49 +1,48 @@
 <template>
   <div class="Menu">
-      <div class="infoPerfil">
-        <img src="../assets/logo.png" alt="" class="img1" />
+    <div class="infoPerfil">
+      <img src="../assets/logo.png" alt="" class="img1" />
 
-        <img src="../assets/user.png" alt="Imagem perfil" class="img2" />
+      <img src="../assets/user.png" alt="Imagem perfil" class="img2" />
 
-        <h4>Nome do usuário</h4>
-      </div>
+      <h4>Nome do usuário</h4>
+    </div>
 
-      <div class="infoMenu">
-        <div class="OpcoesMenu">
-          <router-link  to="/opcoes-do-dia">
-            <img src="../assets/login.png" width="20px" alt="" /> Perfil
-          </router-link>
+    <div class="infoMenu">
+      <div class="OpcoesMenu">
+        <router-link to="/perfil">
+          <i class="fas fa-user-alt"></i> Perfil
+        </router-link>
 
-          <router-link  to="/opcoes-do-dia">
-            <img src="../assets/cesta.png" width="20px" alt="" /> Cesta
-          </router-link>
+        <router-link to="/opcoes-do-dia">
+          <img src="../assets/cesta.png" width="20px" alt="" /> Cesta
+        </router-link>
 
-          <router-link  to="/opcoes-do-dia">
-            <img src="../assets/combo.png" width="18px" alt="" /> Combos
-          </router-link>
+        <router-link to="/opcoes-do-dia">
+          <img src="../assets/combo.png" width="18px" alt="" /> Combos
+        </router-link>
 
-          <router-link  to="/opcoes-do-dia"> 
-             <img src="../assets/menu.png" width="20px" alt="" /> Cardápio
-          </router-link>
+        <router-link to="/opcoes-do-dia">
+          <img src="../assets/menu.png" width="20px" alt="" /> Cardápio
+        </router-link>
 
-          <!-- <a href="/opcoes-do-dia">
+        <!-- <a href="/opcoes-do-dia">
             <img src="../assets/menu.png" width="20px" alt="" /> Cardápio
           </a> -->
 
-          <router-link  to="/opcoes-do-dia">
-            <img src="../assets/delivery-truck.png" width="23px" alt="" />
-            Perdido
-           </router-link>
-        </div>
+        <router-link to="/opcoes-do-dia">
+          <img src="../assets/delivery-truck.png" width="23px" alt="" />
+          Perdido
+        </router-link>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-name: "Menu",
-  components: {
-  },
+  name: "Menu",
+  components: {},
 };
 </script>
 
@@ -122,6 +121,4 @@ h4 {
 .Menu .infoMenu .OpcoesMenu img {
   margin: auto;
 }
-
-
 </style>
