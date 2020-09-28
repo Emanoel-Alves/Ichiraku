@@ -6,6 +6,7 @@ import InformacoesPrato from "../components/InformacoesPrato.vue";
 import OpcoesDoDia from "../components/OpcoesDoDia.vue";
 import TelaLogin from "../components/TelaLogin.vue";
 import TelaCadastro from "../components/TelaCadastro.vue";
+import Perfil from "../components/Perfil.vue";
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/Perfil",
+    name: "Perfil",
+    component: Perfil,
   },
   {
     path: "/cadastro-produto",
