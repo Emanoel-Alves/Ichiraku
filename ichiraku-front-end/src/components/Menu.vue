@@ -10,20 +10,22 @@
 
     <div class="infoMenu">
       <div class="OpcoesMenu">
+
+        <router-link to="/">
+         <i class="fas fa-vihara"></i> Home
+        </router-link>
+
         <router-link to="/perfil">
           <i class="fas fa-user-alt"></i> Perfil
         </router-link>
 
         <router-link to="/opcoes-do-dia">
-          <img src="../assets/cesta.png" width="20px" alt="" /> Cesta
+          <i class="fas fa-shopping-basket"></i> Cesta
         </router-link>
 
+        
         <router-link to="/opcoes-do-dia">
-          <img src="../assets/combo.png" width="18px" alt="" /> Combos
-        </router-link>
-
-        <router-link to="/opcoes-do-dia">
-          <img src="../assets/menu.png" width="20px" alt="" /> Cardápio
+          <i class="fas fa-utensils"></i> Cardápio
         </router-link>
 
         <!-- <a href="/opcoes-do-dia">
@@ -31,7 +33,7 @@
           </a> -->
 
         <router-link to="/opcoes-do-dia">
-          <img src="../assets/delivery-truck.png" width="23px" alt="" />
+         <i class="fas fa-truck"></i>
           Perdido
         </router-link>
       </div>
@@ -39,14 +41,14 @@
   </div>
 </template>
 
-<script>
+<script >
 export default {
   name: "Menu",
   components: {},
 };
 </script>
 
-<style>
+<style scoped>
 .Menu {
   width: 290px;
   height: 100vh;

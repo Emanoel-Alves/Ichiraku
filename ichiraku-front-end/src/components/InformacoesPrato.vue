@@ -5,7 +5,9 @@
 
       <section class="InfoPrato">
         <div class="volta">
-          <a href="../pages/opcoesDoDia.html"> Voltar </a>
+          <router-link to="/opcoes-do-dia">
+              Voltar
+          </router-link>
         </div>
 
         <div class="CardapioPratos">
@@ -61,7 +63,7 @@ name: "InfoPrato",
 };
 </script>
 
-<style>
+<style scoped>
 
 .ConteineInfo{
 
@@ -209,7 +211,8 @@ name: "InfoPrato",
 
 .volta {
 
-    margin: 20px 35px;
+    margin: 20px auto;
+    margin-left: 30px;
 }
 
 

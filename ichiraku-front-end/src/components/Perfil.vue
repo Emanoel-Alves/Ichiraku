@@ -56,9 +56,9 @@ export default {
   align-content: center;
 }
 .form-perfil {
+  width: calc(100% - 290px);
   display: flex;
   flex-direction: column;
-  width: 100%;
   overflow: auto;
   background: #dfdfdf;
 

@@ -10,17 +10,17 @@
         </div>
 
         <div class="CardapioPratos">
-          <a href="../pages/opcoesDoDia.html">
-            <div class="box"><p>Sushi e sashimis</p></div></a
-          >
+          <router-link to="/opcoes-do-dia">
+            <div class="box"><p>Sushi e sashimis</p></div></router-link>
+          
 
-          <a href="../pages/opcoesDoDia.html">
-            <div class="box"><p>Pratos quentes</p></div></a
-          >
+           <router-link to="/opcoes-do-dia">
+            <div class="box"><p>Pratos quentes</p></div></router-link>
+          
 
-          <a href="../pages/opcoesDoDia.html">
+           <router-link to="/opcoes-do-dia">
             <div class="box"><p>Sobremesas</p></div>
-          </a>
+          </router-link>
         </div>
 
         <div class="OpcaoPratos">
@@ -32,7 +32,9 @@
 
               <h3>R$ 25,00</h3>
 
-              <a href="../pages/InfoPrato.html"> Peça delivery </a>
+             <router-link to="/informacoes-prato">
+               Peça delivery 
+              </router-link>
             </div>
           </div>
 
@@ -44,7 +46,9 @@
 
               <h3>R$ 25,00</h3>
 
-              <a href="../pages/InfoPrato.html"> Peça delivery </a>
+            <router-link to="/informacoes-prato">
+               Peça delivery 
+              </router-link>
             </div>
           </div>
 
@@ -56,7 +60,9 @@
 
               <h3>R$ 25,00</h3>
 
-              <a href="../pages/InfoPrato.html"> Peça delivery </a>
+              <router-link to="/informacoes-prato">
+               Peça delivery 
+              </router-link>
             </div>
           </div>
 
@@ -68,7 +74,9 @@
 
               <h3>R$ 25,00</h3>
 
-              <a href="../pages/InfoPrato.html"> Peça delivery </a>
+              <router-link to="/informacoes-prato">
+               Peça delivery 
+              </router-link>
             </div>
           </div>
 
@@ -80,7 +88,9 @@
 
               <h3>R$ 25,00</h3>
 
-              <a href="../pages/InfoPrato.html"> Peça delivery </a>
+              <router-link to="/informacoes-prato">
+               Peça delivery 
+              </router-link>
             </div>
           </div>
 
@@ -91,8 +101,9 @@
               <h4>Sushi</h4>
 
               <h3>R$ 25,00</h3>
-
-              <a href="../pages/InfoPrato.html"> Peça delivery </a>
+              <router-link to="/informacoes-prato">
+               Peça delivery 
+              </router-link>
             </div>
           </div>
         </div>
@@ -111,7 +122,7 @@ name: "Cardapio",
 };
 </script>
 
-<style>
+<style scoped>
 .Conteine{
 
     width: 100%;
