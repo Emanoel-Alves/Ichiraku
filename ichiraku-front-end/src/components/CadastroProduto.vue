@@ -16,6 +16,7 @@
       <label class="inputImag" for=""
         >Imagem do produto *
         <input
+          v-bind="inputUrl"
           name="imagem"
           class="file_customizado entrada"
           type="file"
@@ -24,6 +25,7 @@
       <label for=""
         >Nome do prato *
         <input
+          v-model="inputNome"
           class="entrada"
           name="nome"
           placeholder="Sushi, Shimeji na Manteiga, ..."
@@ -32,6 +34,7 @@
       <label for=""
         >Ingredientes *
         <input
+          v-model="inputIngredientes"
           class="entrada"
           name="ingredientes"
           placeholder="Arroz Para Sushi,  Linguado, Tilápia, Atum, ..."
@@ -39,12 +42,17 @@
       /></label>
       <label for=""
         >Preço R$ *
-        <input class="entrada" name="preco" placeholder="0,00" type="text"
+        <input
+          v-model="inputPreco"
+          class="entrada"
+          name="preco"
+          placeholder="0,00"
+          type="text"
       /></label>
       <label id="categoria" for=""
         >Categoria *
         <input
-          required
+          v-model="inputCategoria"
           class="entrada"
           name="categoria"
           placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
@@ -63,9 +71,28 @@
 
     <div class="lista_produtos" id="lista_produtos">
       <p>Produtos</p>
+      <div
+        class="Pratos"
+        :id="produto.id"
+        v-for="produto in produtos"
+        :key="produto.id"
+      >
+        <div>
+          <img :src="produto.url" alt="" />
+
+          <div class="informacoes">
+            <p>{{ produto.nome }}</p>
+            <p>{{ produto.ingredientes }}</p>
+            <p><strong>Categoria:</strong> {{ produto.categoria }}</p>
+          </div>
+          <p>R$ {{ produto.preco }}</p>
+
+          <button @click="deletar(produto.id)">Deletar</button>
+        </div>
+      </div>
     </div>
-  </div></template
->
+  </div>
+</template>
 
 <script>
 export default {
@@ -73,91 +100,47 @@ export default {
 
   data() {
     return {
-      id: 0,
-      flag: 0,
+      produtos: [
+        {
+          id: 0,
+          nome: "Sushi",
+          ingredientes: "Sushi, arroz, baiao",
+          preco: 20.0,
+          categoria: "Hashimi",
+          url: "../assets/Comida-japonesa-uramaki.jpg",
+        },
+        {
+          id: 1,
+          nome: "Sushi",
+          ingredientes: "Sushi, arroz, baiao",
+          preco: 20.0,
+          categoria: "Hashimi",
+          url: "../assets/Comida-japonesa-uramaki.jpg",
+        },
+      ],
+      inputNome: "",
+      inputIngredientes: "",
+      inputPreco: null,
+      inputCategoria: "",
+      inputUrl: "",
+      index: 2,
     };
   },
   methods: {
     adicionar() {
-      this.flag = 0;
-      this.id = 0;
-      var inputs = document.getElementsByClassName("entrada");
-      id++;
-
-      const button_adc = document.querySelector("#button_adc");
-      button_adc.setAttribute("type", "button");
-
-      if (inputs["imagem"].files[0] == undefined) {
-        inputs["imagem"].focus();
-        if (flag === 0) {
-          flag = msg_Erro();
-        }
-      } else if (
-        (inputs["nome"].value.trim() === "") |
-        (inputs["nome"].value == null)
-      ) {
-        inputs["nome"].focus();
-        if (flag === 0) {
-          flag = msg_Erro();
-        }
-      } else if (
-        (inputs["ingredientes"].value.trim() === "") |
-        (inputs["ingredientes"].value == null)
-      ) {
-        inputs["ingredientes"].focus();
-        if (flag === 0) {
-          flag = msg_Erro();
-        }
-      } else if (
-        (inputs["preco"].value.trim() === "") |
-        (inputs["preco"].value == null) |
-        isNaN(inputs["preco"].value.replace(",", "."))
-      ) {
-        inputs["preco"].focus();
-        if (flag === 0) {
-          flag = msg_Erro();
-        }
-      } else if (
-        (inputs["categoria"].value.trim() === "") |
-        (inputs["categoria"].value == null)
-      ) {
-        inputs["categoria"].focus();
-        if (flag === 0) {
-          flag = msg_Erro();
-        }
-      } else {
-        document.getElementById("lista_produtos").innerHTML += `
-    <div class="Pratos" id="${id}">
-    <div>
-    <img src="../img/${inputs["imagem"].files[0].name}" alt="" />
-      <div class="informacoes">
-      <p>${inputs["nome"].value}</p>
-      <p>${inputs["ingredientes"].value}</p>
-      <p><strong>Categoria:</strong> ${inputs["categoria"].value}</p>
-      </div>
-      <p>R$ ${inputs["preco"].value.replace(".", ",")}</p>
-
-      <button onclick="deletar(${id})" > Deletar </button>
-    </div>
-  </div>`;
-        if (flag === 1) {
-          document.getElementById("alerta_text").remove();
-          flag = 0;
-        }
-        const button_adc = document.querySelector("#button_adc");
-        button_adc.setAttribute("type", "reset");
-        flag = 0;
-      }
+      this.produtos.push({
+        id: this.index++,
+        nome: this.inputNome,
+        ingredientes: this.inputIngredientes,
+        preco: this.inputPreco,
+        categoria: this.inputCategoria,
+        url: this.inputUrl,
+      });
+      console.log(this.produtos);
     },
-
     deletar(id) {
-      document.getElementById(id).remove();
-    },
-
-    msg_Erro() {
-      document.getElementById("alerta").innerHTML +=
-        "<p id='alerta_text' style='color:#840705'>* preencha todos os campos corretamente</p>";
-      return 1;
+      this.produtos.splice(id, 1);
+      console.log(this.produtos);
     },
   },
 };
