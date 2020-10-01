@@ -168,6 +168,9 @@ name: "InfoPrato",
     font-size: 30px;
     margin: 0;
 }
+.InfoPrato .Pratos div p{
+  text-align: left;
+}
 
 .InfoPrato .Pratos div h3{
     font-size: 30px;
@@ -188,7 +191,7 @@ name: "InfoPrato",
 
 .InfoPrato .Pratos div a {
     width: 180px;
-    border-radius: 8px;
+    border-radius: 3px;
     background-color: #F42D2D;
     border: 0.7px solid #EC1B1B;
     color: white;
@@ -218,7 +221,7 @@ name: "InfoPrato",
 
 .volta a{
     width: 135px;
-    border-radius: 8px;
+    border-radius: 3px;
     background-color: #F42D2D;
     border: 0.7px solid #EC1B1B;
     color: white;

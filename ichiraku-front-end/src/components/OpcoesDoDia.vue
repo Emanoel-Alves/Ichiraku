@@ -6,7 +6,7 @@
 
   <section class="Cardapio">
         <div class="Info">
-          <h1>nossas categorias populares</h1>
+          <h1>Nossas categorias populares</h1>
         </div>
 
         <div class="CardapioPratos">
@@ -30,7 +30,7 @@
             <div>
               <h4>Sushi</h4>
 
-              <h3>R$ 25,00</h3>
+              <h5>R$ 25,00</h5>
 
              <router-link to="/informacoes-prato">
                Peça delivery 
@@ -44,7 +44,7 @@
             <div>
               <h4>Sushi</h4>
 
-              <h3>R$ 25,00</h3>
+             <h5>R$ 25,00</h5>
 
             <router-link to="/informacoes-prato">
                Peça delivery 
@@ -58,7 +58,7 @@
             <div>
               <h4>Sushi</h4>
 
-              <h3>R$ 25,00</h3>
+             <h5>R$ 25,00</h5>
 
               <router-link to="/informacoes-prato">
                Peça delivery 
@@ -72,7 +72,7 @@
             <div>
               <h4>Sushi</h4>
 
-              <h3>R$ 25,00</h3>
+           <h5>R$ 25,00</h5>
 
               <router-link to="/informacoes-prato">
                Peça delivery 
@@ -86,7 +86,7 @@
             <div>
               <h4>Sushi</h4>
 
-              <h3>R$ 25,00</h3>
+             <h5>R$ 25,00</h5>
 
               <router-link to="/informacoes-prato">
                Peça delivery 
@@ -100,7 +100,7 @@
             <div>
               <h4>Sushi</h4>
 
-              <h3>R$ 25,00</h3>
+            <h5>R$ 25,00</h5>
               <router-link to="/informacoes-prato">
                Peça delivery 
               </router-link>
@@ -139,7 +139,7 @@ name: "Cardapio",
     align-items: center;
     background-color: #EBEBEB;
     color: black;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .Info {
@@ -242,7 +242,7 @@ name: "Cardapio",
 
 .Pratos div a {
     width: 135px;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: #F42D2D;
     border: 0.7px solid #EC1B1B;
     color: white;
