@@ -32,11 +32,17 @@
             <img src="../assets/menu.png" width="20px" alt="" /> Cardápio
           </a> -->
 
-        <router-link to="/opcoes-do-dia">
-         <i class="fas fa-truck"></i>
-          Perdido
+        <router-link to="/pedido">
+         <i class="fas fa-truck"></i> Pedido
         </router-link>
       </div>
+
+       <div class="MenuSair">
+       <router-link to="/login">
+        <i class="fas fa-sign-out-alt"></i> Logout
+        </router-link>
+       </div>
+
     </div>
   </div>
 </template>
@@ -70,7 +76,7 @@ export default {
   height: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 
   background-color: #840705;
@@ -122,5 +128,21 @@ h4 {
 
 .Menu .infoMenu .OpcoesMenu img {
   margin: auto;
+}
+
+
+
+.Menu .infoMenu .MenuSair a {
+  font-size: 18px;
+  font-weight: 400;
+  color:  black;
+  text-decoration: none;
+  margin: 15px 25px;
+  transition: color 0.8s;
+  text-align: left;
+}
+
+.Menu .infoMenu .MenuSair a:hover {
+  color: #470303;
 }
 </style>

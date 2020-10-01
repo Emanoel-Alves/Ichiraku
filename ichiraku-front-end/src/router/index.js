@@ -7,6 +7,7 @@ import OpcoesDoDia from "../components/OpcoesDoDia.vue";
 import TelaLogin from "../components/TelaLogin.vue";
 import TelaCadastro from "../components/TelaCadastro.vue";
 import Perfil from "../components/Perfil.vue";
+import Pedido from "../components/Pedido.vue";
 
 Vue.use(VueRouter);
 
@@ -49,6 +50,11 @@ const routes = [
     path: "/cadastro",
     name: "TelaCadastro",
     component: TelaCadastro,
+  },
+  {
+    path: "/pedido",
+    name: "Pedido",
+    component: Pedido,
   },
 ];
 
