@@ -129,13 +129,14 @@ export default {
   methods: {
     adicionar() {
       this.produtos.push({
-        id: this.index++,
+        id: this.index,
         nome: this.inputNome,
         ingredientes: this.inputIngredientes,
         preco: this.inputPreco,
         categoria: this.inputCategoria,
         url: this.inputUrl,
       });
+      this.index++;
       console.log(this.produtos);
     },
     deletar(id) {
