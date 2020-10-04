@@ -100,30 +100,14 @@ export default {
 
   data() {
     return {
-      produtos: [
-        {
-          id: 0,
-          nome: "Sushi",
-          ingredientes: "Sushi, arroz, baiao",
-          preco: 20.0,
-          categoria: "Hashimi",
-          url: "../assets/Comida-japonesa-uramaki.jpg",
-        },
-        {
-          id: 1,
-          nome: "Sushi",
-          ingredientes: "Sushi, arroz, baiao",
-          preco: 20.0,
-          categoria: "Hashimi",
-          url: "../assets/Comida-japonesa-uramaki.jpg",
-        },
-      ],
+      produtos: [],
       inputNome: "",
       inputIngredientes: "",
       inputPreco: null,
       inputCategoria: "",
       inputUrl: "",
       index: 2,
+      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
     };
   },
   methods: {
@@ -143,6 +127,14 @@ export default {
       this.produtos.splice(id, 1);
       console.log(this.produtos);
     },
+    getProdutos() {
+      this.$http.get(this.baseURI).then((result) => {
+        this.produtos = result.data;
+      });
+    },
+  },
+  mounted() {
+    this.getProdutos();
   },
 };
 </script>
