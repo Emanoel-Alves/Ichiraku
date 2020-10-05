@@ -11,11 +11,12 @@
       <label class="inputImag" for=""
         >Imagem do produto *
         <input
-          v-bind="inputUrl"
           name="imagem"
+          id="file"
+          ref="file"
           class="file_customizado entrada"
           type="file"
-          accept="image/*"
+          accept="image/png"
       /></label>
       <label for=""
         >Nome do prato *
@@ -35,42 +36,47 @@
           placeholder="Arroz Para Sushi,  Linguado, Tilápia, Atum, ..."
           type="text"
       /></label>
-      <label for=""
-        >Preço R$ *
-        <input
-          v-model="inputPreco"
-          class="entrada"
-          name="preco"
-          placeholder="0,00"
-          type="text"
-      /></label>
-      <label id="categoria" for=""
-        >Categoria *
-        <div
-          name="categoria"
-          placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
-          type="text"
-          class="form-group col-md-4 entrada"
-        >
-          <select
-            v-model="inputCategoria"
-            id="inputState"
-            class="form-control entrada-select"
+      <div
+        style="display: flex; flex-direction: row; width: 80%; margin-left: 10%"
+      >
+        <label style="margin-right: 10%" for=""
+          >Preço R$ *
+          <input
+            v-model="inputPreco"
+            class="entrada"
+            name="preco"
+            placeholder="0,00"
+            type="text"
+        /></label>
+        <label style="width: 100%" id="categoria" for=""
+          >Categoria *
+          <div
+            name="categoria"
+            placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
+            type="text"
+            class="form-group col-md-4 entrada"
           >
-            <option value="Shushi e Shashimis">Shushi e Shashimis</option>
-            <option value="Pratos quentes">Pratos quentes</option>
-            <option value="Sobremesas">Sobremesas</option>
-            <option value="Selecione..." selected>Selecione...</option>
-          </select>
-        </div>
-        <!-- <input
+            <select
+              style="width: 228%; height: 35px; border: none"
+              v-model="inputCategoria"
+              id="inputState"
+              class="form-control entrada-select"
+            >
+              <option value="Selecione..." selected>Selecione...</option>
+              <option value="Shushi e Shashimis">Shushi e Shashimis</option>
+              <option value="Pratos quentes">Pratos quentes</option>
+              <option value="Sobremesas">Sobremesas</option>
+            </select>
+          </div>
+          <!-- <input
           v-model="inputCategoria"
           class="entrada"
           name="categoria"
           placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
           type="text"
       /> -->
-      </label>
+        </label>
+      </div>
       <div id="alerta"></div>
 
       <input
@@ -91,7 +97,7 @@
         :key="produto.id"
       >
         <div>
-          <img :src="produto.url" alt="" />
+          <img :src="'uploads/produto/' + produto.id + '.png'" alt="" />
 
           <div class="informacoes">
             <p>{{ produto.nome }}</p>
@@ -134,11 +140,35 @@ export default {
       inputIngredientes: "",
       inputPreco: null,
       inputCategoria: "Selecione...",
-      inputUrl: "",
+      file: null,
       baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+      baseUploadURI: "http://localhost:8080/ichiraku-back-and/upload",
     };
   },
   methods: {
+    handleFileUpload(id) {
+      this.file = this.$refs.file.files[0];
+      console.log("file: " + this.file.name);
+      let obj = {
+        resource: "produto",
+        id: id,
+      };
+      let json = JSON.stringify(obj);
+
+      let form = new FormData();
+      form.append("obj", json);
+      form.append("file", this.file);
+
+      this.$http
+        .post(this.baseUploadURI, form, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((result) => {
+          console.log(result);
+        });
+    },
     postProduto() {
       this.produto.nome = this.inputNome;
       this.produto.ingredientes = this.inputIngredientes;
@@ -146,7 +176,8 @@ export default {
       this.produto.categoria = this.inputCategoria;
 
       this.$http.post(this.baseURI, this.produto).then((result) => {
-        this.produtos.push(result.data);
+        this.produtos = this.getProdutos();
+        this.handleFileUpload(result.data.id);
       });
     },
     deleteProduto(id) {
@@ -161,7 +192,7 @@ export default {
     },
     putProduto(id) {
       this.$http.put(this.baseURI + "/" + id).then((result) => {
-        this.produtos = result.data;
+        this.produtos = result.data; //lembrar de adc o obj produto na rota e de atualizar a imagem tmb
       });
     },
   },
@@ -189,6 +220,8 @@ export default {
 .button-edit {
   width: 50px;
   height: 30px;
+  padding: 3px;
+  color: #fff;
 }
 
 .main {
