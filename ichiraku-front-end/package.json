@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "axios": "^0.20.0",
     "bootstrap-validate": "^2.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"

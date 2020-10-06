@@ -2,13 +2,8 @@
   <div class="main">
     <div class="sloganBox">
       <div class="slogan">
-        <a
-          ><img
-            src="https://fontmeme.com/permalink/200902/3f1ed0925d836682782312739f0fc4c3.png"
-            alt="naruto-font"
-            border="0"
-        /></a>
-        <img class="imagemSlogan" src="../assets/lamen.png" alt="" />
+        <a><img src="../assets/logo.png" alt="naruto-font" border="0" /></a>
+        <!-- <img class="imagemSlogan" src="../assets/lamen.png" alt="" /> -->
       </div>
     </div>
 
@@ -16,11 +11,12 @@
       <label class="inputImag" for=""
         >Imagem do produto *
         <input
-          v-bind="inputUrl"
           name="imagem"
+          id="file"
+          ref="file"
           class="file_customizado entrada"
           type="file"
-          accept="image/*"
+          accept="image/png"
       /></label>
       <label for=""
         >Nome do prato *
@@ -40,28 +36,51 @@
           placeholder="Arroz Para Sushi,  Linguado, Tilápia, Atum, ..."
           type="text"
       /></label>
-      <label for=""
-        >Preço R$ *
-        <input
-          v-model="inputPreco"
-          class="entrada"
-          name="preco"
-          placeholder="0,00"
-          type="text"
-      /></label>
-      <label id="categoria" for=""
-        >Categoria *
-        <input
+      <div
+        style="display: flex; flex-direction: row; width: 80%; margin-left: 10%"
+      >
+        <label style="margin-right: 10%" for=""
+          >Preço R$ *
+          <input
+            v-model="inputPreco"
+            class="entrada"
+            name="preco"
+            placeholder="0,00"
+            type="text"
+        /></label>
+        <label style="width: 100%" id="categoria" for=""
+          >Categoria *
+          <div
+            name="categoria"
+            placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
+            type="text"
+            class="form-group col-md-4 entrada"
+          >
+            <select
+              style="width: 228%; height: 35px; border: none"
+              v-model="inputCategoria"
+              id="inputState"
+              class="form-control entrada-select"
+            >
+              <option value="Selecione..." selected>Selecione...</option>
+              <option value="Shushi e Shashimis">Shushi e Shashimis</option>
+              <option value="Pratos quentes">Pratos quentes</option>
+              <option value="Sobremesas">Sobremesas</option>
+            </select>
+          </div>
+          <!-- <input
           v-model="inputCategoria"
           class="entrada"
           name="categoria"
           placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
           type="text"
-      /></label>
+      /> -->
+        </label>
+      </div>
       <div id="alerta"></div>
 
       <input
-        @click="adicionar()"
+        @click="postProduto()"
         value="Cadastrar"
         class="add_produto"
         type="button"
@@ -78,7 +97,7 @@
         :key="produto.id"
       >
         <div>
-          <img :src="produto.url" alt="" />
+          <img :src="'uploads/produto/' + produto.id + '.png'" alt="" />
 
           <div class="informacoes">
             <p>{{ produto.nome }}</p>
@@ -87,7 +106,22 @@
           </div>
           <p>R$ {{ produto.preco }}</p>
 
-          <button @click="deletar(produto.id)">Deletar</button>
+          <div class="buttons-config">
+            <a
+              @click="deleteProduto(produto.id)"
+              class="btn btn-danger button-delete"
+              role="button"
+              aria-disabled="true"
+              ><i class="far fa-trash-alt"></i
+            ></a>
+            <a
+              @click="putProduto(produto.id)"
+              class="btn btn-primary button-edit"
+              role="button"
+              aria-disabled="true"
+              ><i class="fas fa-pencil-alt"></i
+            ></a>
+          </div>
         </div>
       </div>
     </div>
@@ -100,49 +134,70 @@ export default {
 
   data() {
     return {
-      produtos: [
-        {
-          id: 0,
-          nome: "Sushi",
-          ingredientes: "Sushi, arroz, baiao",
-          preco: 20.0,
-          categoria: "Hashimi",
-          url: "../assets/Comida-japonesa-uramaki.jpg",
-        },
-        {
-          id: 1,
-          nome: "Sushi",
-          ingredientes: "Sushi, arroz, baiao",
-          preco: 20.0,
-          categoria: "Hashimi",
-          url: "../assets/Comida-japonesa-uramaki.jpg",
-        },
-      ],
+      produtos: [],
+      produto: {},
       inputNome: "",
       inputIngredientes: "",
       inputPreco: null,
-      inputCategoria: "",
-      inputUrl: "",
-      index: 2,
+      inputCategoria: "Selecione...",
+      file: null,
+      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+      baseUploadURI: "http://localhost:8080/ichiraku-back-and/upload",
     };
   },
   methods: {
-    adicionar() {
-      this.produtos.push({
-        id: this.index,
-        nome: this.inputNome,
-        ingredientes: this.inputIngredientes,
-        preco: this.inputPreco,
-        categoria: this.inputCategoria,
-        url: this.inputUrl,
+    handleFileUpload(id) {
+      this.file = this.$refs.file.files[0];
+      console.log("file: " + this.file.name);
+      let obj = {
+        resource: "produto",
+        id: id,
+      };
+      let json = JSON.stringify(obj);
+
+      let form = new FormData();
+      form.append("obj", json);
+      form.append("file", this.file);
+
+      this.$http
+        .post(this.baseUploadURI, form, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((result) => {
+          console.log(result);
+        });
+    },
+    postProduto() {
+      this.produto.nome = this.inputNome;
+      this.produto.ingredientes = this.inputIngredientes;
+      this.produto.preco = Number(this.inputPreco);
+      this.produto.categoria = this.inputCategoria;
+
+      this.$http.post(this.baseURI, this.produto).then((result) => {
+        this.produtos = this.getProdutos();
+        this.handleFileUpload(result.data.id);
       });
-      this.index++;
-      console.log(this.produtos);
     },
-    deletar(id) {
-      this.produtos.splice(id, 1);
-      console.log(this.produtos);
+    deleteProduto(id) {
+      this.$http.delete(this.baseURI + "/" + id).then((result) => {
+        this.produtos = this.getProdutos();
+      });
     },
+    getProdutos() {
+      this.$http.get(this.baseURI).then((result) => {
+        this.produtos = result.data;
+      });
+    },
+    putProduto(id) {
+      this.$http.put(this.baseURI + "/" + id).then((result) => {
+        this.produtos = result.data; //lembrar de adc o obj produto na rota e de atualizar a imagem tmb
+      });
+    },
+  },
+  mounted() {
+    this.getProdutos();
   },
 };
 </script>
@@ -151,6 +206,22 @@ export default {
 * {
   margin: 0px;
   padding: 0px;
+}
+
+.button-delete {
+  width: 50px;
+  height: 30px;
+  padding: 3px;
+  color: #fff;
+  background-color: #ec1b1b;
+  margin: 5px;
+}
+
+.button-edit {
+  width: 50px;
+  height: 30px;
+  padding: 3px;
+  color: #fff;
 }
 
 .main {
@@ -176,7 +247,7 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-left: 35%;
+  margin-left: 40%;
   margin-top: 30px;
   margin-bottom: 10px;
 }
@@ -187,14 +258,14 @@ export default {
 
 .formulario {
   display: flex;
-  width: 60%;
-  height: 50%;
+  width: 70%;
+  height: 60%;
   background-color: #e5e5e5;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .imagemSlogan {
@@ -235,6 +306,11 @@ export default {
   border: 2px solid #e5e5e5;
 }
 
+select {
+  width: 150%;
+  padding-left: 5px;
+}
+
 input {
   background-color: #fff;
   border-color: #fff;
@@ -249,13 +325,13 @@ input {
 
 .lista_produtos {
   display: flex;
-  width: 60%;
+  width: 70%;
   height: 100%;
   background-color: #e5e5e5;
   flex-wrap: wrap;
   align-items: center;
   margin: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -264,13 +340,18 @@ input {
 .lista_produtos > p {
   width: 100%;
   text-align: center;
-  font-size: 25px;
+  font-size: 35px;
+  margin-bottom: 5px;
 }
 
 label {
+  text-align: left;
+
+  font-size: 15px;
   width: 70%;
   margin-top: 10px;
   font-family: "Roboto", sans-serif;
+  outline-color: #840705;
 }
 
 .Pratos {
@@ -328,6 +409,7 @@ label {
 }
 
 .informacoes {
+  text-align: left;
   display: flex;
   flex-direction: column;
   width: 70%;

@@ -79,6 +79,9 @@ const routes = [
     path: "/pedido",
     name: "Pedido",
     component: Pedido,
+    meta: {
+      title: "Ichiraku - Pedidos",
+    },
   },
 ];
 
