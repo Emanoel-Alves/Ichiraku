@@ -10,7 +10,7 @@
           </router-link>
         </div>
 
-        <div class="CardapioPratos">
+        <!-- <div class="CardapioPratos">
           <a href="../pages/opcoesDoDia.html">
             <div class="box"><p>Sushi e sashimis</p></div></a
           >
@@ -24,29 +24,39 @@
             <div class="box"><p>Sobremesas</p></div>
             ></a
           >
-        </div>
+        </div> -->
 
         <div class="OpcaoPratos">
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="Prato" />
+          <div class="Pratos" >
+            <!-- <div v-if="prato.id == post.id "> -->
+            <img :src="'uploads/produto/' + prato.id + '.png'" alt="" />
 
             <div>
-              <h2>Sushi</h2>
+              <h2>{{prato.nome}}</h2>
 
               <div class="ingredientes">
-                <h4>Ingredientes</h4>
+
+                <h5>Categoria: {{prato.categoria }}</h5>
+                <h4>Ingredientes {{$route.params.idPrato}}</h4>
 
                 <p>
-                  arroz japonês, tempero à base de peixe bonito, cenoura, vagem,
-                  Gengibre, algas, salmão, vinagre de arroz.
+                  {{ prato.ingredientes }}
                 </p>
               </div>
 
-              <h3>R$ 25,00</h3>
+              <h3>R$ {{ prato.preco }}</h3>
 
-              <a href=""> Peça delivery </a>
+              <!-- <a href=""> Adicionar a Cesta</a> -->
+              <input
+                @click="postCesta()"
+                value="Adicionar a Cesta"
+                class="add_produto"
+                type="button"
+                id="button_adc"
+              />
             </div>
-          </div>
+            </div>
+       
         </div>
       </section>
     </div>
@@ -59,6 +69,42 @@ export default {
 name: "InfoPrato",
   components: {
       Menu,
+  }, 
+   
+  data() {
+    return {
+      prato: {},
+      inputNome: "",
+      inputPreco: null,
+      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+    };
+  },
+  components: {
+      Menu,
+  },  
+  methods: {
+  
+    getProdutos() {
+      console.log('resultadi:', this.$route.params.idPrato );
+          this.$http.get(this.baseURI + "/"+ this.$route.params.idPrato ).then((result) => {
+          this.prato = result.data;
+            
+         });
+     },
+    
+    postCesta() {
+      this.produto.nome = this.inputNome;
+      this.produto.preco = Number(this.inputPreco);
+      this.produto.categoria = this.inputCategoria;
+
+      this.$http.post(this.baseURI, this.produto).then((result) => {
+        this.produtos = this.getProdutos();
+
+      });
+    },  
+  },
+  mounted() {
+    this.getProdutos();
   },
 };
 </script>
@@ -75,12 +121,13 @@ name: "InfoPrato",
 
 .InfoPrato{
     width: calc(100% - 290px);
-    height:auto;
+    height:100vh;
     display: flex;
     flex-direction: column;
    
     background-color: #EBEBEB;
     color: black;
+    overflow: auto;
 }
 
 .InfoPrato .CardapioPratos {
@@ -106,6 +153,9 @@ name: "InfoPrato",
 
     width: 220px ;
     height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
     background-color: white;
     text-align: center;
     position: absolute;
@@ -116,7 +166,7 @@ name: "InfoPrato",
 
 .InfoPrato .CardapioPratos .box p{ 
 
-    margin: 10px;
+    margin: auto;
 
 }
 
@@ -189,7 +239,7 @@ name: "InfoPrato",
     margin: 0;
 }
 
-.InfoPrato .Pratos div a {
+.InfoPrato .Pratos .add_produto {
     width: 180px;
     border-radius: 3px;
     background-color: #F42D2D;
@@ -205,7 +255,7 @@ name: "InfoPrato",
     
 }
 
-.InfoPrato .Pratos div a:hover {
+.InfoPrato .Pratos .add_produto:hover {
 
     background-color: #b40707;
     border: 0.7px solid #b40707;

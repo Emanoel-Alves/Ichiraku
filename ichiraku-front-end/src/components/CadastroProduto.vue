@@ -98,7 +98,7 @@
       >
         <div>
           <img :src="'uploads/produto/' + produto.id + '.png'" alt="" />
-
+  
           <div class="informacoes">
             <p>{{ produto.nome }}</p>
             <p>{{ produto.ingredientes }}</p>

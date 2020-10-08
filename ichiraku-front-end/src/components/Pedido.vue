@@ -7,19 +7,27 @@
           <h1>Acompanhar  meu  pedido</h1>
         </div>
 
-          <div class="Status">
+          <!-- <div class="Status">
 
               <h1>Status:</h1>
               <h3>Pedido confirmado</h3>
 
-          </div>
+          </div> -->
 
         <div class="StatusPratos">
 
             <h2>Itens comprados:</h2>
-    
-        </div>
 
+            <div class="Pedido" v-for="pedido in pedidos" :key="pedido.id" >
+
+              <p > Prato: {{pedido.nome}} </p>
+
+              <p > Valor: R$ {{ pedido.preco }}</p>
+
+            </div>
+                   <!-- <h4>Valor total: {{soma}} </h4> -->
+
+        </div>
 
     </section>
 
@@ -30,8 +38,39 @@
 import Menu from "@/components/Menu.vue";
 export default {
 name: "Pedido",
+
+data() {
+    return {
+      soma: 0,
+      pedidos: [],
+      baseURI: "http://localhost:8080/ichiraku-back-and/api/pedidos",
+    };
+  },
+
   components: {
     Menu,
+  },
+  methods: {
+
+   getPedidos() {
+         this.$http.get(this.baseURI).then((result) => {
+         this.pedidos = result.data;
+        });
+     },
+
+     somar(){
+
+       for(pedido in this.pedidos){
+
+         this.soma += pedido.preco;
+   
+       }
+      console.log(this.soma)
+     }
+  },
+  mounted() {
+    this.getPedidos();
+    this.somar();
   },
 }
 </script>
@@ -69,7 +108,7 @@ section {
     height: auto;
     margin: 30px auto;
     color: #840705;
-    font-size: 23px;
+    font-size: 21px;
 }
 
 .Status {
@@ -82,7 +121,7 @@ section {
 }
 
 .Status h3 {
-
+  font-size: 33px;
     color: #DC2F02;
     margin: auto 15px;
 }
@@ -106,4 +145,26 @@ section {
    font-size: 18px;
    color: gray;
 }
+
+.StatusPratos h4 {
+
+   text-align: right;
+   margin: 12px 15px;
+   color: #840705;
+}
+
+.StatusPratos .Pedido {
+
+  display: flex;
+}
+
+.StatusPratos .Pedido p{
+
+  margin: 12px 25px;
+  font-size: 21px;
+  color: black;
+
+}
+
+
 </style>

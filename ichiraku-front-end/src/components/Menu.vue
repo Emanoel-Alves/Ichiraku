@@ -19,7 +19,7 @@
           <i class="fas fa-user-alt"></i> Perfil
         </router-link>
 
-        <router-link to="/opcoes-do-dia">
+        <router-link to="/cesta">
           <i class="fas fa-shopping-basket"></i> Cesta
         </router-link>
 
