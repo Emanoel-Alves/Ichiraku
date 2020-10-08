@@ -7,35 +7,50 @@
       </div>
     </div>
 
-    <form action="" class="formulario">
+    <form @submit="checkForm" class="needs-validation formulario" novalidate>
       <label class="inputImag" for=""
         >Imagem do produto *
         <input
           name="imagem"
           id="file"
           ref="file"
-          class="file_customizado entrada"
+          class="file_customizado form-control entrada"
           type="file"
           accept="image/png"
-      /></label>
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor, selecione uma imagem.
+        </div></label
+      >
       <label for=""
         >Nome do prato *
         <input
           v-model="inputNome"
-          class="entrada"
+          class="entrada nomeProduto form-control"
           name="nome"
           placeholder="Sushi, Shimeji na Manteiga, ..."
           type="text"
-      /></label>
+          required
+        />
+        <div class="invalid-feedback">
+          * Por favor, digite o nome do prato válido.
+        </div></label
+      >
       <label for=""
         >Ingredientes *
         <input
           v-model="inputIngredientes"
-          class="entrada"
+          class="entrada form-control"
           name="ingredientes"
           placeholder="Arroz Para Sushi,  Linguado, Tilápia, Atum, ..."
           type="text"
-      /></label>
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor, digite os ingredientes.
+        </div></label
+      >
       <div
         style="display: flex; flex-direction: row; width: 80%; margin-left: 10%"
       >
@@ -43,11 +58,16 @@
           >Preço R$ *
           <input
             v-model="inputPreco"
-            class="entrada"
+            class="entrada form-control"
             name="preco"
             placeholder="0,00"
             type="text"
-        /></label>
+            required
+          />
+          <div class="invalid-feedback">
+            Por favor, digite o preço corretamente.
+          </div></label
+        >
         <label style="width: 100%" id="categoria" for=""
           >Categoria *
           <div
@@ -60,13 +80,20 @@
               style="width: 228%; height: 35px; border: none"
               v-model="inputCategoria"
               id="inputState"
-              class="form-control entrada-select"
+              class="custom-select"
+              placeholder="asas"
+              required
             >
-              <option value="Selecione..." selected>Selecione...</option>
+              <option value="Selecione..." disabled selected="asasa">
+                Selecione...
+              </option>
               <option value="Shushi e Shashimis">Shushi e Shashimis</option>
               <option value="Pratos quentes">Pratos quentes</option>
               <option value="Sobremesas">Sobremesas</option>
             </select>
+            <div style="width: 200%" class="invalid-feedback">
+              Por favor, selecione uma categoria.
+            </div>
           </div>
           <!-- <input
           v-model="inputCategoria"
@@ -83,7 +110,7 @@
         @click="postProduto()"
         value="Cadastrar"
         class="add_produto"
-        type="button"
+        type="submit"
         id="button_adc"
       />
     </form>
@@ -139,13 +166,29 @@ export default {
       inputNome: "",
       inputIngredientes: "",
       inputPreco: null,
-      inputCategoria: "Selecione...",
+      inputCategoria: "",
       file: null,
       baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
       baseUploadURI: "http://localhost:8080/ichiraku-back-and/upload",
     };
   },
   methods: {
+    checkForm(event) {
+      event.preventDefault();
+      event.target.classList.add("was-validated");
+
+      console.log("entrou\n\n::: " + this.inputNome.trim() === "");
+      if (this.inputNome.trim() === "") {
+        let inputt = document.querySelector(".nomeProduto");
+        inputt.setAttribute("class", "entrada nomeProduto  is-invalid");
+      } else {
+        let inputt = document.querySelector(".nomeProduto");
+        inputt.setAttribute(
+          "class",
+          "entrada form-control nomeProduto  is-valid"
+        );
+      }
+    },
     handleFileUpload(id) {
       this.file = this.$refs.file.files[0];
       console.log("file: " + this.file.name);
