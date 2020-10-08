@@ -23,89 +23,26 @@
           </router-link>
         </div>
 
-        <div class="OpcaoPratos">
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="" />
+        <div 
+        class="OpcaoPratos" >
+
+          <div class="Pratos" v-for="prato in pratos" :key="prato.id" >
+
+            <img :src="'uploads/produto/' + prato.id + '.png'" alt="" />
 
             <div>
-              <h4>Sushi</h4>
+              <h4> {{prato.nome}} </h4>
 
-              <h5>R$ 25,00</h5>
+              <h5> R$ {{ prato.preco }}</h5>
 
-             <router-link to="/informacoes-prato">
+             <router-link :to="{name: 'InformacoesPrato', params: { idPrato: prato.id  }}" >
                Peça delivery 
               </router-link>
+
             </div>
           </div>
 
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="" />
-
-            <div>
-              <h4>Sushi</h4>
-
-             <h5>R$ 25,00</h5>
-
-            <router-link to="/informacoes-prato">
-               Peça delivery 
-              </router-link>
-            </div>
-          </div>
-
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="" />
-
-            <div>
-              <h4>Sushi</h4>
-
-             <h5>R$ 25,00</h5>
-
-              <router-link to="/informacoes-prato">
-               Peça delivery 
-              </router-link>
-            </div>
-          </div>
-
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="" />
-
-            <div>
-              <h4>Sushi</h4>
-
-           <h5>R$ 25,00</h5>
-
-              <router-link to="/informacoes-prato">
-               Peça delivery 
-              </router-link>
-            </div>
-          </div>
-
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="" />
-
-            <div>
-              <h4>Sushi</h4>
-
-             <h5>R$ 25,00</h5>
-
-              <router-link to="/informacoes-prato">
-               Peça delivery 
-              </router-link>
-            </div>
-          </div>
-
-          <div class="Pratos">
-            <img src="../assets/img1.png" alt="" />
-
-            <div>
-              <h4>Sushi</h4>
-
-            <h5>R$ 25,00</h5>
-              <router-link to="/informacoes-prato">
-               Peça delivery 
-              </router-link>
-            </div>
-          </div>
+        
         </div>
       </section>
       </div>
@@ -116,8 +53,26 @@ import Menu from "@/components/Menu.vue";
 
 export default {
 name: "Cardapio",
+
+data() {
+    return {
+      pratos: [],
+      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+    };
+  },
   components: {
       Menu,
+  },  
+  methods: {
+
+   getProdutos() {
+         this.$http.get(this.baseURI).then((result) => {
+        this.pratos = result.data;
+        });
+     },
+  },
+  mounted() {
+    this.getProdutos();
   },
 };
 </script>
@@ -150,7 +105,7 @@ name: "Cardapio",
 
 .Info h1{
     text-align: center;
-    font-size: 40px;
+    font-size: 33px;
     margin: 0;
 }
 
@@ -176,6 +131,9 @@ name: "Cardapio",
 
     width: 220px ;
     height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items:  center;
     background-color: white;
     text-align: center;
     position: absolute;
@@ -186,7 +144,7 @@ name: "Cardapio",
 
 .CardapioPratos .box p{ 
 
-    margin: 10px;
+    margin: 0;
 
 }
 

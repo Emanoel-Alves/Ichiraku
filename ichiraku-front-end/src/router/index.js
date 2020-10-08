@@ -8,6 +8,7 @@ import TelaLogin from "../components/TelaLogin.vue";
 import TelaCadastro from "../components/TelaCadastro.vue";
 import Perfil from "../components/Perfil.vue";
 import Pedido from "../components/Pedido.vue";
+import Cesta from "../components/Cesta.vue";
 
 Vue.use(VueRouter);
 
@@ -44,9 +45,10 @@ const routes = [
     },
   },
   {
-    path: "/informacoes-prato",
+    path: "/informacoes-prato/:id",
     name: "InformacoesPrato",
     component: InformacoesPrato,
+    props: true,
     meta: {
       title: "Ichiraku - Informações do Prato",
     },
@@ -81,6 +83,14 @@ const routes = [
     component: Pedido,
     meta: {
       title: "Ichiraku - Pedidos",
+    },
+  },
+  {
+    path: "/cesta",
+    name: "Cesta",
+    component: Cesta,
+    meta: {
+      title: "Ichiraku - Cesta",
     },
   },
 ];
