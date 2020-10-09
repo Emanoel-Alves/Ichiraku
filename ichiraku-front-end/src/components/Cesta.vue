@@ -60,6 +60,7 @@ data() {
       inputNome: "",
       inputPreco: null,
       baseURI: "http://localhost:8080/ichiraku-back-and/api/cestas",
+      baseURIPedido: "http://localhost:8080/ichiraku-back-and/api/pedidos"
     };
   },
 
@@ -75,23 +76,22 @@ data() {
      },
 
     postPedido() {
-      this.produto.nome = this.inputNome;
-      this.produto.ingredientes = this.inputIngredientes;
-      this.produto.preco = Number(this.inputPreco);
-      this.produto.categoria = this.inputCategoria;
+      this.pedido.nome = this.inputNome;
+      this.pedido.preco = Number(this.inputPreco);
 
-      this.$http.post(this.baseURI, this.produto).then((result) => {
-        this.produtos = this.getProdutos();
-        this.handleFileUpload(result.data.id);
+      this.$http.post(this.baseURIPedido, this.pedido).then((result) => {
+       
+        this.deleteCesta();
       });
     },
-    deletePedido(id) {
+
+    deleteCesta(id) {
       this.$http.delete(this.baseURI + "/" + id).then((result) => {
-        this.produtos = this.getProdutos();
+        this.cestas = this.getCestas();
       });
     },
 
-  },
+  }, 
   mounted() {
     this.getCesta();
   },

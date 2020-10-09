@@ -44,7 +44,7 @@
                 </p>
               </div>
 
-              <h3>R$ {{ prato.preco }}</h3>
+              <h3 >R$ {{ prato.preco }} </h3>
 
               <!-- <a href=""> Adicionar a Cesta</a> -->
               <input
@@ -77,6 +77,7 @@ name: "InfoPrato",
       inputNome: "",
       inputPreco: null,
       baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+      baseURICesta: "http://localhost:8080/ichiraku-back-and/api/cestas"
     };
   },
   components: {
@@ -93,15 +94,14 @@ name: "InfoPrato",
      },
     
     postCesta() {
-      this.produto.nome = this.inputNome;
-      this.produto.preco = Number(this.inputPreco);
-      this.produto.categoria = this.inputCategoria;
+      this.cesta.idusuario = 1;
+      this.cesta.idprato = prato.id;
+      this.cesta.nomeprato = prato.nome;
+      this.cesta.valorprato = prato.preco;
 
-      this.$http.post(this.baseURI, this.produto).then((result) => {
-        this.produtos = this.getProdutos();
-
+      this.$http.post(this.baseURICesta, this.cesta).then((result) => {
       });
-    },  
+    }, 
   },
   mounted() {
     this.getProdutos();
