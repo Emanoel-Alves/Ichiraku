@@ -22,15 +22,4 @@
         <filter-name>CorsFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <servlet>
-    	<servlet-name>PedidoService</servlet-name>
-    	<display-name>PedidoService</display-name>
-    	<description></description>
-    	<servlet-class>controller.PedidoService</servlet-class>
-    </servlet>
-    <servlet-mapping>
-    	<servlet-name>PedidoService</servlet-name>
-    	<url-pattern>/PedidoService</url-pattern>
-    </servlet-mapping>
-    
 </web-app>
