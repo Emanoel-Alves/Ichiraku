@@ -1,17 +1,19 @@
 <template>
   <div class = "cadastro">
             <form>
+                <div class="esquerda">
                 <label>E-mail*</label><br>
-                <input id = "email" type = "text" name = "email" placeholder="exemplo@email.com" required> /><br>
+                <input id = "email" type = "text" name = "email" placeholder="exemplo@email.com" required> <br>
                 <label>Senha*</label><br>
-                <input id = "senha" type = "password" name = "senha" placeholder="password" required> /><br>
+                <input id = "senha" type = "password" name = "senha" placeholder="password" required><br>
                 <label>Confirmar senha*</label><br>
-                <input id = "confirmar" type = "password" name = "confirmar" placeholder="password" required> /><br><br>
-                <button type="button" onclick="cadastrar()" id = "cad">Cadastrar</button><br><br>
+                <input id = "confirmar" type = "password" name = "confirmar" placeholder="password" required> <br><br>
+                </div>
+                <button type="button" @click="cadastrar" id = "cad">Cadastrar</button><br><br>
 
                 <div class = "direita">
-                    <h4>Já é cadastrado?</h4>
-                <a href = "ichiraku.html">Logar</a>
+                    <h6>Já é cadastrado?</h6>
+                <a href = "/login">Logar</a>
                 </div>
                     
                 
@@ -27,44 +29,48 @@
 
 <script>
 export default {
-
-    cadastrar(){
-
-    var senha = document.getElementById("senha").value;
-
-        if( document.forms[0].email.value==""
-        || document.forms[0].email.value.indexOf('@')==-1 
-        || document.forms[0].email.value.indexOf('.')==-1 
-        || senha.length < 8) 
-        { 
-
-                 alert( "Por favor, informe um E-MAIL válido ou uma senha!" ); 
-
-        }
-        
-        else {
-            document.getElementById("cad").onclick = function () {
-            location.href = "home.html";
-        
+    name: 'cadastrar',
+        data(){
+        return{
+            errors: [],
+            email: null,
+            senha: null,
+            confSenha: null,
             
-        }
+        };
+    },
 
-        
+    methods:{
+        cadastrar: function() {
+            if(email.value == "" ||
+               email.value.indexOf("@") == -1 ||
+               email.value.indexOf(".") == -1 ||
+               senha.value == "" || senha.value.length < 8){
+                    alert("Por favor, revise seu e-mail ou senha!");
 
-}
+               }else{
+                   this.$router.replace("cadastrar");
+               }             
+           
+      }
+
+      }
 
 
-}
+    }
 
-}
+
 </script>
 
 <style scoped>
 
 body{
-    background-color: lightgray;
-    margin: 0;
-    height: 100vh;
+    background-color: #DFDFDF;
+    
+}
+
+.esquerda{
+    text-align: left;
 }
 
 .cadastro{
@@ -84,13 +90,14 @@ body{
     
     position: absolute;
     width: 6px;
-    height: 100%;
-    left: 685px;
-    top: 0;
-    
-    background:gray;
+    height: 450px;
+    left: 600px;
+    top: 0px;
+
+    background:#C4C4C4;
     border-radius: 30px;
     display: flex;
+
     
 
 }
@@ -99,13 +106,13 @@ body{
     position: absolute;
     width: auto;
     height: auto;
-    left: 150px;
-    top: 215px; 
+    left: 60px;
+    top: 100px; 
   
 }
 
 input{
-    background: #ffffff;
+    background:#C4C4C4;
     border-radius: 8px;
     width: 330px;
     height: 30px;
@@ -135,7 +142,7 @@ button{
     top: 200px;
     
 }
-h4 {
+h6 {
     margin: 10px;
 }
 

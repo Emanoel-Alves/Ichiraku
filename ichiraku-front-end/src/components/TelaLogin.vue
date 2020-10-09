@@ -2,14 +2,16 @@
   <div class = "login">
         <form>    
             <div class = "img"><img src="../assets/usuario.png" alt="usuario"></div><br>
+            <div class="esquerda">
             <label>E-mail:</label><br>
-            <input id="email" type="text" name="email" placeholder="exemplo@email.com" required /><br>
+            <input id="email" type="text" name="email" placeholder="exemplo@email.com" required><br>
             <label>Senha:</label><br>
-            <input id="senha" type="password" name="senha" placeholder="password" required /> <br><br>
-            <button type="button" onclick="entrar()" id = "logar">Entrar</button><br><br>
+            <input id="senha" type="password" name="senha" placeholder="password" required> <br><br>
+            </div>
+            <button type="button" @click="entrar" id = "logar">Entrar</button><br><br>
             <div class = "direita">
                 <h5>Não é cadastrado?</h5>
-                <a href = "..\ichiraku-front-end\src\components\TelaCadastro.vue">Cadastre-se</a>
+                <a href = "\cadastro">Cadastre-se</a>
             </div> 
         </form>
         
@@ -22,37 +24,51 @@
 
 <script>
 export default {
+    name: 'entrar',
+        data(){
+        return{
+            errors: [],
+            email: null,
+            senha: null,
+            
+        };
+    },
 
-    entrar(){
-  var senha = document.getElementById("senha").value;
+    methods:{
+        entrar: function() {
+            if(email.value == "" ||
+               email.value.indexOf("@") == -1 ||
+               email.value.indexOf(".") == -1 ||
+               senha.value == "" || senha.value.length < 8){
+                    alert("Por favor, revise seu e-mail ou senha!");
 
-  if (
-    document.forms[0].email.value == "" ||
-    document.forms[0].email.value.indexOf("@") == -1 ||
-    document.forms[0].email.value.indexOf(".") == -1 ||
-    senha.length < 8
-  ) {
-    alert("Por favor, informe um E-MAIL válido ou uma senha!");
-  } else {
-    document.getElementById("logar").onclick = function () {
-      location.href = "C:\Users\srtal\OneDrive\Área de Trabalho\UFC 2020.1\Desenvolvimento WEB\github\Ichiraku\ichiraku-front-end\src\components\Home.vue";
-    };
-  }
-}
+               }else{
+                   this.$router.replace("logar");
+               }
+           
+      }
+
+      }
 
 
-}
+    }
+
 </script>
 
-<style>
+<style scoped>
 
 body{
-    background-color:lightgray;      
+    background-color: #DFDFDF;      
 }
 
 h5 {
     margin:10px;
 }
+
+.esquerda{
+text-align: left;
+}
+
 .login{
     position: absolute;
     display: flex;
@@ -81,9 +97,9 @@ position: absolute;
 width: 6px;
 height: 500px;
 left: 600px;
-top: 1px;
+top: 0px;
 
-background:gray;
+background:#C4C4C4;
 border-radius: 30px;
 display: flex;
 
@@ -120,6 +136,7 @@ margin:0  auto;
 .img img{
 width: 90px;
 height: 90px;
+top: 20px;
 
 }
 
