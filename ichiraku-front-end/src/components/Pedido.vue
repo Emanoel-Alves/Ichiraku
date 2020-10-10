@@ -20,12 +20,12 @@
 
             <div class="Pedido" v-for="pedido in pedidos" :key="pedido.id" >
 
-              <p > Prato: {{pedido.nome}} </p>
+              <h4 class="pratosInfo"> Pratos: <p class="pratosInfo">{{pedido.nome}} </p>  </h4>
 
-              <p > Valor: R$ {{ pedido.preco }}</p>
-
+              <h5> Valor total:  R$ {{ pedido.valorTotal }} </h5>
+              <br > <br>
+              
             </div>
-                   <!-- <h4>Valor total: {{soma}} </h4> -->
 
         </div>
 
@@ -58,19 +58,10 @@ data() {
         });
      },
 
-     somar(){
-
-       for(pedido in this.pedidos){
-
-         this.soma += pedido.preco;
-   
-       }
-      console.log(this.soma)
-     }
   },
   mounted() {
     this.getPedidos();
-    this.somar();
+    
   },
 }
 </script>
@@ -138,6 +129,13 @@ section {
 
 }
 
+.StatusPratos .pratosInfo {
+
+
+  width: 67%;
+}
+
+
 .StatusPratos h2 {
 
    text-align: left;
@@ -146,10 +144,10 @@ section {
    color: gray;
 }
 
-.StatusPratos h4 {
+.StatusPratos h4,h5 {
 
-   text-align: right;
-   margin: 12px 15px;
+   text-align: left;
+   margin: 12px 20px;
    color: #840705;
 }
 

@@ -23,7 +23,7 @@
 
       <div class="OpcaoPratos">
         <div class="Pratos" v-for="prato in pratos" :key="prato.id">
-          <img :src="'uploads/produto/' + prato.id + '.png'" alt="" />
+          <img :src="'../uploads/produto/' + prato.id + '.png'" alt="" />
 
           <div>
             <h4>{{ prato.nome }}</h4>

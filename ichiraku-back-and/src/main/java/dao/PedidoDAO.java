@@ -16,18 +16,18 @@ public class PedidoDAO {
 
 	private static Connection connection = DbUtil.getConnection();
 	 
-    public static Pedido addPedido(int idUser, String nome, double preco) {
+    public static Pedido addPedido(int idUser, String nome, double valorTotal) {
         try {
-            PreparedStatement pStmt = connection.prepareStatement("INSERT INTO Pedidos (idUser, nome ,preco) VALUES (?, ?, ?)",
+            PreparedStatement pStmt = connection.prepareStatement("INSERT INTO Pedidos (idUser, nome ,valorTotal) VALUES (?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             pStmt.setInt(1, idUser);
             pStmt.setString(2, nome);
-            pStmt.setDouble(3, preco);
+            pStmt.setDouble(3, valorTotal);
             pStmt.executeUpdate();
             System.out.println("entrouu\n\n\n\n\n\n");
             ResultSet rs = pStmt.getGeneratedKeys();
             if (rs.next()) {
-                return new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("preco"));
+                return new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("valorTotal"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,17 +36,17 @@ public class PedidoDAO {
         return null;
     }
  
-    public static Pedido updatePedido(int id, int idUser, String nome, double preco) {
+    public static Pedido updatePedido(int id, int idUser, String nome, double valorTotal) {
         try {
-            PreparedStatement pStmt = connection.prepareStatement("update Pedidos set  nome=?,  preco=? where id=?",
+            PreparedStatement pStmt = connection.prepareStatement("update Pedidos set  nome=?,  valorTotal=? where id=?",
                     Statement.RETURN_GENERATED_KEYS);
             pStmt.setString(1, nome);
-            pStmt.setDouble(3, preco);
+            pStmt.setDouble(3, valorTotal);
             pStmt.setInt(5, id);
             pStmt.executeUpdate();
             ResultSet rs = pStmt.getGeneratedKeys();
             if (rs.next()) {
-                return new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("preco"));
+                return new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("valorTotal"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class PedidoDAO {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("select * from Pedidos order by id");
             while (rs.next()) {
-            	Pedido pedido = new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("preco"));
+            	Pedido pedido = new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("valorTotal"));
                 pedidos.add(pedido);
             }
         } catch (SQLException e) {
@@ -87,7 +87,7 @@ public class PedidoDAO {
             pStmt.setInt(1, id);
             ResultSet rs = pStmt.executeQuery();
             if (rs.next()) {
-                return new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("preco"));
+                return new Pedido(rs.getInt("id"), rs.getInt("idUser"), rs.getString("nome"), rs.getDouble("valorTotal"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
