@@ -34,26 +34,23 @@
 
             <div class="ingredientes">
               <h5>Categoria: {{ prato.categoria }}</h5>
-              <h4>Ingredientes {{ $route.params.idPrato }}</h4>
+              <h4>Ingredientes {{ prato.ingredientes }}</h4>
 
-              <h3 >R$ {{ prato.preco }} </h3>
+              <h3>R$ {{ prato.preco }}</h3>
 
               <!-- <a href=""> Adicionar a Cesta</a> -->
-             
-            </div>
-            
-             <input
-                @click="postCesta()"
-                value="Adicionar a Cesta"
-                class="add_produto"
-                type="button"
-                id="button_adc"
-              />
             </div>
 
+            <input
+              @click="postCesta()"
+              value="Adicionar a Cesta"
+              class="add_produto"
+              type="button"
+              id="button_adc"
+            />
           </div>
         </div>
-    
+      </div>
     </section>
   </div>
 </template>
@@ -74,7 +71,7 @@ export default {
       inputNome: "",
       inputPreco: null,
       baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
-      baseURICesta: "http://localhost:8080/ichiraku-back-and/api/cestas"
+      baseURICesta: "http://localhost:8080/ichiraku-back-and/api/cestas",
     };
   },
   components: {
@@ -91,16 +88,15 @@ export default {
     },
 
     postCesta() {
-     
       this.cesta.idPrato = this.prato.id;
       this.cesta.idUsuario = 1;
       this.cesta.nomePrato = this.prato.nome;
-      this.cesta.valorPrato =  Number(this.prato.preco);
+      this.cesta.valorPrato = Number(this.prato.preco);
 
       this.$http.post(this.baseURICesta, this.cesta).then((result) => {
         this.$router.push("/cesta");
       });
-    }, 
+    },
   },
   mounted() {
     console.log(this.$route.params.idPrato);
