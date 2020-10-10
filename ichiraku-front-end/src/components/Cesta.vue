@@ -96,7 +96,7 @@ data() {
       console.log(this.pedido);
       
       this.$http.post(this.baseURIPedido, this.pedido).then((result) => {
-       alert("Compra realizada com sucesso");
+        this.$router.push("/pedido");
       });
 
       this.cestas.forEach(element => {

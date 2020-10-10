@@ -3,17 +3,17 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
- 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
- 
+
 import dao.UserDAO;
 import model.User;
  
@@ -43,6 +43,10 @@ public class UserService extends HttpServlet {
                     jsonObject.put("id", user.getId());
                     jsonObject.put("login", user.getLogin());
                     jsonObject.put("password", user.getPassword());
+                    jsonObject.put("email", user.getEmail());
+                    jsonObject.put("senha", user.getSenha());
+                    jsonObject.put("confSenha", user.getConfSenha());
+     
  
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
@@ -64,6 +68,10 @@ public class UserService extends HttpServlet {
                 jsonObject.put("id", user.getId());
                 jsonObject.put("login", user.getLogin());
                 jsonObject.put("password", user.getPassword());
+                jsonObject.put("email", user.getEmail());
+                jsonObject.put("senha", user.getSenha());
+                jsonObject.put("confSenha", user.getConfSenha());
+ 
  
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
@@ -86,6 +94,9 @@ public class UserService extends HttpServlet {
                 jsonObject.put("id", user.getId());
                 jsonObject.put("login", user.getLogin());
                 jsonObject.put("password", user.getPassword());
+                jsonObject.put("email", user.getEmail());
+                jsonObject.put("senha", user.getSenha());
+                jsonObject.put("confSenha", user.getConfSenha());
  
                 jArray.put(jsonObject);
             }
@@ -117,13 +128,17 @@ public class UserService extends HttpServlet {
         try {
             // Request
             jsonObject = new JSONObject(jb.toString());
-            user = UserDAO.addUser(jsonObject.getString("login"), jsonObject.getString("password"));
+            user = UserDAO.addUser(jsonObject.getString("login"), jsonObject.getString("password"),
+            jsonObject.getString("email"), jsonObject.getString("senha"), jsonObject.getString("confSenha"));
  
             // Response
             jsonObject = new JSONObject();
             jsonObject.put("id", user.getId());
             jsonObject.put("login", user.getLogin());
             jsonObject.put("password", user.getPassword());
+            jsonObject.put("email", user.getEmail());
+            jsonObject.put("senha", user.getSenha());
+            jsonObject.put("confSenha", user.getConfSenha());
  
         } catch (JSONException e) {
         }
@@ -161,13 +176,17 @@ public class UserService extends HttpServlet {
                     // Request
                     jsonObject = new JSONObject(jb.toString());
                     user = UserDAO.updateUser(Integer.parseInt(params[1]), jsonObject.getString("login"),
-                            jsonObject.getString("password"));
+                    jsonObject.getString("password"), jsonObject.getString("email"), jsonObject.getString("senha"),
+                    jsonObject.getString("confSenha"));
  
                     // Response
                     jsonObject = new JSONObject();
                     jsonObject.put("id", user.getId());
                     jsonObject.put("login", user.getLogin());
                     jsonObject.put("password", user.getPassword());
+                    jsonObject.put("email", user.getEmail());
+                    jsonObject.put("senha", user.getSenha());
+                    jsonObject.put("confSenha", user.getConfSenha());
  
                 } catch (JSONException e) {
                 }

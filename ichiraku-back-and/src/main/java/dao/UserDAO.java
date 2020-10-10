@@ -15,11 +15,11 @@ public class UserDAO {
     static {
         initUsers();
     }
- 
+    
     private static void initUsers() {
-        User user1 = new User(1, "almada", "123");
-        User user2 = new User(2, "anderson", "456");
-        User user3 = new User(3, "alex", "789");
+        User user1 = new User(1, "almada", "123", "almada@gmail.com", "1234", "1234");
+        User user2 = new User(2, "anderson", "456", "anderson@gmail.com", "1357", "1357");
+        User user3 = new User(3, "alex", "789", "alex@gmail.com", "4567", "4567");
  
         userMap.put(user1.getId(), user1);
         userMap.put(user2.getId(), user2);
@@ -42,15 +42,15 @@ public class UserDAO {
         return null;
     }
  
-    public static User addUser(String login, String password) {
-        User user = new User(i, login, password);
+    public static User addUser(String login, String password, String email, String senha, String confSenha) {
+        User user = new User(i, login, password, email, senha, confSenha);
         userMap.put(user.getId(), user);
         i++;
         return user;
     }
  
-    public static User updateUser(int id, String login, String password) {
-        User user = new User(id, login, password);
+    public static User updateUser(int id, String login, String password, String email, String senha, String confSenha) {
+        User user = new User(id, login, password, email, senha, confSenha);
         userMap.put(user.getId(), user);
         return user;
     }

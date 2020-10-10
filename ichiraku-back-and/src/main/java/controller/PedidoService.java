@@ -107,7 +107,7 @@ public class PedidoService extends HttpServlet {
         try {
             // Request
             jsonObject = new JSONObject(jb.toString());
-            pedido = PedidoDAO.addPedido(jsonObject.getInt("idUser"),jsonObject.getString("nome"),jsonObject.getDouble("preco"));
+            pedido = PedidoDAO.addPedido(jsonObject.getInt("idUser"),jsonObject.getString("nome"),jsonObject.getDouble("valorTotal"));
  
             // Response
             jsonObject = new JSONObject();
@@ -155,7 +155,7 @@ public class PedidoService extends HttpServlet {
 	                try {
 	                    // Request
 	                    jsonObject = new JSONObject(jb.toString());
-	                    pedido = PedidoDAO.updatePedido(Integer.parseInt(params[1]),jsonObject.getInt("idUser"), jsonObject.getString("nome"),jsonObject.getDouble("preco"));
+	                    pedido = PedidoDAO.updatePedido(Integer.parseInt(params[1]),jsonObject.getInt("idUser"), jsonObject.getString("nome"),jsonObject.getDouble("valorTotal"));
 	 
 	                    // Response
 	                    jsonObject = new JSONObject();
