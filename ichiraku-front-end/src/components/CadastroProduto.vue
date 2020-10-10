@@ -115,7 +115,7 @@
         :key="produto.id"
       >
         <div>
-          <img :src="'uploads/produto/' + produto.id + '.png'" alt="" />
+          <img :src="'../uploads/produto/' + produto.id + '.png'" alt="" />
 
           <div class="informacoes">
             <p>{{ produto.nome }}</p>
