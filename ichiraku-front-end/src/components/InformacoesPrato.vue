@@ -27,7 +27,7 @@
         <div class="Pratos">
           <!-- <div v-if="prato.id == post.id "> -->
           <!-- {{ prato.id }} -->
-          <img :src="'uploads/produto/' + prato.id + '.png'" alt="" />
+          <img :src="'../uploads/produto/' + prato.id + '.png'" alt="" />
 
           <div>
             <h2>{{ prato.nome }}</h2>
@@ -36,24 +36,24 @@
               <h5>Categoria: {{ prato.categoria }}</h5>
               <h4>Ingredientes {{ $route.params.idPrato }}</h4>
 
-              <p>
-                {{ prato.ingredientes }}
-              </p>
+              <h3 >R$ {{ prato.preco }} </h3>
+
+              <!-- <a href=""> Adicionar a Cesta</a> -->
+             
+            </div>
+            
+             <input
+                @click="postCesta()"
+                value="Adicionar a Cesta"
+                class="add_produto"
+                type="button"
+                id="button_adc"
+              />
             </div>
 
-            <h3>R$ {{ prato.preco }}</h3>
-
-            <!-- <a href=""> Adicionar a Cesta</a> -->
-            <input
-              @click="postCesta()"
-              value="Adicionar a Cesta"
-              class="add_produto"
-              type="button"
-              id="button_adc"
-            />
           </div>
         </div>
-      </div>
+    
     </section>
   </div>
 </template>
@@ -62,17 +62,19 @@
 import Menu from "@/components/Menu.vue";
 
 export default {
-  name: "InfoPrato",
+  name: "InformacoesPrato",
   components: {
     Menu,
   },
   // props: ["idProduto"],
   data() {
     return {
-      prato: {},
+      prato: [],
+      cesta: {},
       inputNome: "",
       inputPreco: null,
       baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+      baseURICesta: "http://localhost:8080/ichiraku-back-and/api/cestas"
     };
   },
   components: {
@@ -89,14 +91,16 @@ export default {
     },
 
     postCesta() {
-      this.produto.nome = this.inputNome;
-      this.produto.preco = Number(this.inputPreco);
-      this.produto.categoria = this.inputCategoria;
+     
+      this.cesta.idPrato = this.prato.id;
+      this.cesta.idUsuario = 1;
+      this.cesta.nomePrato = this.prato.nome;
+      this.cesta.valorPrato =  Number(this.prato.preco);
 
-      this.$http.post(this.baseURI, this.produto).then((result) => {
-        this.produtos = this.getProdutos();
+      this.$http.post(this.baseURICesta, this.cesta).then((result) => {
+        this.$router.push("/cesta");
       });
-    },
+    }, 
   },
   mounted() {
     console.log(this.$route.params.idPrato);

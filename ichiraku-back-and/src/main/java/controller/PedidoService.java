@@ -48,7 +48,7 @@ public class PedidoService extends HttpServlet {
                     jsonObject.put("id", pedido.getId());
                     jsonObject.put("idUser", pedido.getIdUser());
                     jsonObject.put("nome", pedido.getNome());
-                    jsonObject.put("preco", pedido.getPreco());
+                    jsonObject.put("valorTotal", pedido.getValorTotal());
                    
                     
                     response.setContentType("application/json");
@@ -73,7 +73,7 @@ public class PedidoService extends HttpServlet {
                 jsonObject.put("id", pedido.getId());
                 jsonObject.put("idUser", pedido.getIdUser());
                 jsonObject.put("nome", pedido.getNome());
-                jsonObject.put("preco", pedido.getPreco());
+                jsonObject.put("valorTotal", pedido.getValorTotal());
                
  
                 jArray.put(jsonObject);
@@ -107,7 +107,7 @@ public class PedidoService extends HttpServlet {
         try {
             // Request
             jsonObject = new JSONObject(jb.toString());
-            pedido = PedidoDAO.addPedido(jsonObject.getInt("idUser"),jsonObject.getString("nome"),jsonObject.getDouble("preco"));
+            pedido = PedidoDAO.addPedido(jsonObject.getInt("idUser"),jsonObject.getString("nome"),jsonObject.getDouble("valorTotal"));
  
             // Response
             jsonObject = new JSONObject();
@@ -115,7 +115,7 @@ public class PedidoService extends HttpServlet {
             jsonObject.put("id", pedido.getId());
             jsonObject.put("idUser", pedido.getIdUser());
             jsonObject.put("nome", pedido.getNome());
-            jsonObject.put("preco", pedido.getPreco());
+            jsonObject.put("valorTotal", pedido.getValorTotal());
           
 
  
@@ -155,7 +155,7 @@ public class PedidoService extends HttpServlet {
 	                try {
 	                    // Request
 	                    jsonObject = new JSONObject(jb.toString());
-	                    pedido = PedidoDAO.updatePedido(Integer.parseInt(params[1]),jsonObject.getInt("idUser"), jsonObject.getString("nome"),jsonObject.getDouble("preco"));
+	                    pedido = PedidoDAO.updatePedido(Integer.parseInt(params[1]),jsonObject.getInt("idUser"), jsonObject.getString("nome"),jsonObject.getDouble("valorTotal"));
 	 
 	                    // Response
 	                    jsonObject = new JSONObject();
@@ -163,7 +163,7 @@ public class PedidoService extends HttpServlet {
 	                    jsonObject.put("id", pedido.getId());
 	                    jsonObject.put("idUser", pedido.getIdUser());
 	                    jsonObject.put("nome", pedido.getNome());
-	                    jsonObject.put("preco", pedido.getPreco());
+	                    jsonObject.put("valorTotal", pedido.getValorTotal());
 	                   
 	 
 	                } catch (JSONException e) {

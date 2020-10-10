@@ -135,7 +135,7 @@ h4 {
 .Menu .infoMenu .MenuSair a {
   font-size: 18px;
   font-weight: 400;
-  color:  black;
+  color:  white;
   text-decoration: none;
   margin: 15px 25px;
   transition: color 0.8s;

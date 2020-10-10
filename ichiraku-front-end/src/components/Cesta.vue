@@ -10,18 +10,26 @@
          <div class="StatusPratos">
 
             <div class="titulo">        
-                <h4 > Pratos  </h4>
+                <h4 > Prato  </h4>
                 <h4 > Valor </h4>
-                <h4>  Quantidade </h4>
+
             </div>
 
-            <div class="Pedido" v-for="cesta in cestas" :key="cesta.id" > 
+            <div class="Pedido" v-for="cesta in cestas " :key="cesta.id" > 
 
-                <p>{{cesta.nome}}</p>
+                <img :src="'../uploads/produto/' + cesta.idPrato + '.png'" alt="" />
+
+                <p> {{cesta.nomePrato}}</p>
   
-                <p>{{cesta.preco}}</p>
+                <p>{{cesta.valorPrato}}</p>
             
-                <p> </p>
+                <a
+                @click="deleteCesta(cesta.id)"
+                class="btn btn-danger button-delete"
+                role="button"
+                aria-disabled="true"
+                ><i class="far fa-trash-alt"></i
+              ></a>
 
             </div>     
 
@@ -56,10 +64,11 @@ name: "Cesta",
 data() {
     return {
       soma: 0,
+      idUsuario: 1,
       cestas: [],
-      inputNome: "",
-      inputPreco: null,
+      pedido:{},
       baseURI: "http://localhost:8080/ichiraku-back-and/api/cestas",
+      baseURIPedido: "http://localhost:8080/ichiraku-back-and/api/pedidos"
     };
   },
 
@@ -69,29 +78,41 @@ data() {
   methods: {
 
    getCesta() {
-         this.$http.get(this.baseURI).then((result) => {
+         this.$http.get(this.baseURI + "/" + this.idUsuario ).then((result) => {
          this.cestas = result.data;
         });
      },
 
     postPedido() {
-      this.produto.nome = this.inputNome;
-      this.produto.ingredientes = this.inputIngredientes;
-      this.produto.preco = Number(this.inputPreco);
-      this.produto.categoria = this.inputCategoria;
+      this.pedido.idUser = 1;
+      this.pedido.nome = "";
+      this.pedido.valorTotal = 0;
 
-      this.$http.post(this.baseURI, this.produto).then((result) => {
-        this.produtos = this.getProdutos();
-        this.handleFileUpload(result.data.id);
+      this.cestas.forEach(element => {
+        this.pedido.nome += element.nomePrato + " - "; //concatena os nomes dos pratos
+        this.pedido.valorTotal = Number(element.valorPrato) + Number(this.pedido.valorTotal) // faz a soma total
       });
+      this.pedido.nome =  this.pedido.nome.slice(0, this.pedido.nome.length - 2) //remove o ultimo traço
+      console.log(this.pedido);
+      
+      this.$http.post(this.baseURIPedido, this.pedido).then((result) => {
+        this.$router.push("/pedido");
+      });
+
+      this.cestas.forEach(element => {
+        this.deleteCesta(element.id); //remove todo mundo da cesta depois de adicionar no carrinho, muitas chamadas na api, mas fe em deus
+        
+      });
+       
     },
-    deletePedido(id) {
+
+    deleteCesta(id) {
       this.$http.delete(this.baseURI + "/" + id).then((result) => {
-        this.produtos = this.getProdutos();
+        this.cestas = this.getCesta();
       });
     },
 
-  },
+  }, 
   mounted() {
     this.getCesta();
   },
@@ -165,11 +186,12 @@ section {
 }
 .titulo{
 
-    width: 80%;
+    width: 88%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     height: auto;
     margin: 10px auto;
+    margin-left: 0;
     margin-bottom: 30px;
     background: white;
 
@@ -180,12 +202,21 @@ section {
     width: 80%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     height: auto;
     margin: 10px auto;
     margin-bottom: 30px;
     background: white;
 
 }
+
+.Pedido img {
+
+  width: 80px;
+  height: 80px;
+}
+
+
 
 .butão {
     width: 80%;
@@ -215,5 +246,14 @@ section {
     background-color: #b40707;
     border: 0.7px solid #b40707;
 
+}
+
+.button-delete {
+  width: 50px;
+  height: 28px;
+  padding: 3px;
+  color: #fff;
+  background-color: #ec1b1b;
+  margin: 5px;
 }
 </style>

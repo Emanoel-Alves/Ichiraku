@@ -5,7 +5,7 @@ public class Pedido {
 	int id;
 	int idUser;
 	String nome;
-	double preco;
+	double valorTotal;
 	
 	
 	public Pedido(int id, int idUser, String nome, double preco) {
@@ -13,13 +13,13 @@ public class Pedido {
 		this.id = id;
 		this.idUser = idUser;
 		this.nome = nome;
-		this.preco = preco;
+		this.valorTotal = preco;
 		
 	}
 
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", idUser=" + idUser + ", nome=" + nome + ", preco=" + preco +  "]";
+		return "Pedido [id=" + id + ", idUser=" + idUser + ", nome=" + nome + ", valorTotal=" + valorTotal +  "]";
 	}
 
 	public int getId() {
@@ -46,12 +46,12 @@ public class Pedido {
 		this.nome = nome;
 	}
 
-	public double getPreco() {
-		return preco;
+	public double getValorTotal() {
+		return valorTotal;
 	}
 
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setValorTotal(double preco) {
+		this.valorTotal = preco;
 	}
 
 }
