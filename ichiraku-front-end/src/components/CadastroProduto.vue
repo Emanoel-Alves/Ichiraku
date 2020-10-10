@@ -41,14 +41,14 @@
         >Ingredientes *
         <input
           v-model="inputIngredientes"
-          class="entrada form-control"
+          class="entrada listaIngredientes form-control"
           name="ingredientes"
           placeholder="Arroz Para Sushi,  Linguado, Tilápia, Atum, ..."
           type="text"
           required
         />
         <div class="invalid-feedback">
-          Por favor, digite os ingredientes.
+          * Por favor, digite os ingredientes.
         </div></label
       >
       <div
@@ -58,14 +58,14 @@
           >Preço R$ *
           <input
             v-model="inputPreco"
-            class="entrada form-control"
+            class="entrada valorPrato form-control"
             name="preco"
             placeholder="0,00"
             type="text"
             required
           />
           <div class="invalid-feedback">
-            Por favor, digite o preço corretamente.
+            * Por favor, digite o preço corretamente.
           </div></label
         >
         <label style="width: 100%" id="categoria" for=""
@@ -74,14 +74,13 @@
             name="categoria"
             placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
             type="text"
-            class="form-group col-md-4 entrada"
+            class="form-group categorias col-md-4 entrada"
           >
             <select
-              style="width: 228%; height: 35px; border: none"
+              style="height: 35px; max-width: 303px; border: none"
               v-model="inputCategoria"
               id="inputState"
-              class="custom-select"
-              placeholder="asas"
+              class="custom-select categorias"
               required
             >
               <option value="Selecione..." disabled selected="asasa">
@@ -91,20 +90,12 @@
               <option value="Pratos quentes">Pratos quentes</option>
               <option value="Sobremesas">Sobremesas</option>
             </select>
-            <div style="width: 200%" class="invalid-feedback">
-              Por favor, selecione uma categoria.
+            <div class="invalid-feedback">
+              * Por favor, selecione uma categoria.
             </div>
           </div>
-          <!-- <input
-          v-model="inputCategoria"
-          class="entrada"
-          name="categoria"
-          placeholder="Sashimi Salmão, Uramaki Califórnia, Hot Roll, ... "
-          type="text"
-      /> -->
         </label>
       </div>
-      <div id="alerta"></div>
 
       <input
         @click="postProduto()"
@@ -165,9 +156,9 @@ export default {
       produto: {},
       inputNome: "",
       inputIngredientes: "",
-      inputPreco: null,
+      inputPreco: "",
       inputCategoria: "",
-      file: null,
+      file: "",
       baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
       baseUploadURI: "http://localhost:8080/ichiraku-back-and/upload",
     };
@@ -177,7 +168,7 @@ export default {
       event.preventDefault();
       event.target.classList.add("was-validated");
 
-      console.log("entrou\n\n::: " + this.inputNome.trim() === "");
+      // console.log("entrou\n\n::: " + this.inputNome.trim() === "");
       if (this.inputNome.trim() === "") {
         let inputt = document.querySelector(".nomeProduto");
         inputt.setAttribute("class", "entrada nomeProduto  is-invalid");
@@ -186,6 +177,47 @@ export default {
         inputt.setAttribute(
           "class",
           "entrada form-control nomeProduto  is-valid"
+        );
+      }
+
+      if (this.inputIngredientes.trim() === "") {
+        let inputt = document.querySelector(".listaIngredientes");
+        inputt.setAttribute("class", "entrada listaIngredientes  is-invalid");
+      } else {
+        let inputt = document.querySelector(".listaIngredientes");
+        inputt.setAttribute(
+          "class",
+          "entrada form-control listaIngredientes  is-valid"
+        );
+      }
+
+      if (
+        this.inputPreco.trim() === "" ||
+        isNaN(this.inputPreco.trim().replace(",", "."))
+      ) {
+        let inputt = document.querySelector(".valorPrato");
+        inputt.setAttribute("class", "entrada valorPrato  is-invalid");
+      } else {
+        let inputt = document.querySelector(".valorPrato");
+        inputt.setAttribute(
+          "class",
+          "entrada form-control valorPrato  is-valid"
+        );
+      }
+
+      if (this.inputCategoria.trim() === "") {
+        let inputt = document.querySelector(".categorias");
+        inputt.setAttribute("class", "entrada categorias  is-invalid");
+        inputt.setAttribute(
+          "styles",
+          "height: 35px; max-width: 303px; border: none"
+        );
+      } else {
+        let inputt = document.querySelector(".categorias");
+        inputt.setAttribute("class", "entrada  categorias  is-valid");
+        inputt.setAttribute(
+          "styles",
+          "height: 35px; max-width: 303px; border: none"
         );
       }
     },
@@ -213,15 +245,31 @@ export default {
         });
     },
     postProduto() {
-      this.produto.nome = this.inputNome;
-      this.produto.ingredientes = this.inputIngredientes;
-      this.produto.preco = Number(this.inputPreco);
-      this.produto.categoria = this.inputCategoria;
+      this.file = this.$refs.file.files[0];
+      if (
+        this.inputNome.trim() !== "" &&
+        this.inputIngredientes.trim() !== "" &&
+        this.inputPreco.trim() !== "" &&
+        (isNaN(this.inputPreco.trim()) ||
+          !isNaN(this.inputPreco.trim().replace(",", "."))) &&
+        this.inputCategoria.trim() !== "" &&
+        this.file !== undefined
+      ) {
+        this.produto.nome = this.inputNome;
+        this.produto.ingredientes = this.inputIngredientes;
+        this.produto.preco = Number(this.inputPreco.replace(",", "."));
+        this.produto.categoria = this.inputCategoria;
 
-      this.$http.post(this.baseURI, this.produto).then((result) => {
-        this.produtos = this.getProdutos();
-        this.handleFileUpload(result.data.id);
-      });
+        this.$http.post(this.baseURI, this.produto).then((result) => {
+          this.produtos = this.getProdutos();
+          this.handleFileUpload(result.data.id);
+        });
+        // this.inputNome = "";
+        // this.inputIngredientes = "";
+        // this.inputPreco = "";
+        // this.inputCategoria = "";
+        // this.$router.go(0);
+      }
     },
     deleteProduto(id) {
       this.$http.delete(this.baseURI + "/" + id).then((result) => {
@@ -350,7 +398,7 @@ export default {
 }
 
 select {
-  width: 150%;
+  width: 303px;
   padding-left: 5px;
 }
 
