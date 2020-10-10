@@ -45,7 +45,7 @@ const routes = [
     },
   },
   {
-    path: "/informacoes-prato/:id",
+    path: "/informacoes-prato/:idPrato",
     name: "InformacoesPrato",
     component: InformacoesPrato,
     props: true,
@@ -56,6 +56,7 @@ const routes = [
   {
     path: "/opcoes-do-dia",
     name: "OpcoesDoDia",
+    props: true,
     component: OpcoesDoDia,
     meta: {
       title: "Ichiraku - Opções do Dia",
