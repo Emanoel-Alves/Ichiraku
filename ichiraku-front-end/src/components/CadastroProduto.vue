@@ -2,7 +2,7 @@
   <div class="main">
     <div class="sloganBox">
       <div class="slogan">
-        <a><img src="../assets/logo.png" alt="naruto-font" border="0" /></a>
+        <a><img src="../assets/logo.png" alt="naruto-font" border="0"/></a>
         <!-- <img class="imagemSlogan" src="../assets/lamen.png" alt="" /> -->
       </div>
     </div>
@@ -115,7 +115,7 @@
         :key="produto.id"
       >
         <div>
-          <img :src="'../uploads/produto/' + produto.id + '.png'" alt="" />
+          <img :src="'../uploads/produtos/' + produto.id + '.png'" alt="" />
 
           <div class="informacoes">
             <p>{{ produto.nome }}</p>
@@ -159,8 +159,8 @@ export default {
       inputPreco: "",
       inputCategoria: "",
       file: "",
-      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
-      baseUploadURI: "http://localhost:8080/ichiraku-back-and/upload",
+      baseURI: "http://localhost:8080/api/produtos",
+      baseUploadURI: "http://localhost:8080/upload",
     };
   },
   methods: {
@@ -222,18 +222,13 @@ export default {
       }
     },
     handleFileUpload(id) {
-      this.file = this.$refs.file.files[0];
-      console.log("file: " + this.file.name);
-      let obj = {
-        resource: "produto",
-        id: id,
-      };
-      let json = JSON.stringify(obj);
-
+       this.file = this.$refs.file.files[0];
+ 
       let form = new FormData();
-      form.append("obj", json);
+      form.append("resource", "produtos");
+      form.append("id", id);
       form.append("file", this.file);
-
+ 
       this.$http
         .post(this.baseUploadURI, form, {
           headers: {
@@ -260,6 +255,7 @@ export default {
         this.produto.preco = Number(this.inputPreco.replace(",", "."));
         this.produto.categoria = this.inputCategoria;
 
+          // console.log("ola");
         this.$http.post(this.baseURI, this.produto).then((result) => {
           this.produtos = this.getProdutos();
           this.handleFileUpload(result.data.id);
@@ -283,6 +279,7 @@ export default {
     },
     putProduto(id) {
       this.$http.put(this.baseURI + "/" + id).then((result) => {
+        console.log("post");
         this.produtos = result.data; //lembrar de adc o obj produto na rota e de atualizar a imagem tmb
       });
     },
