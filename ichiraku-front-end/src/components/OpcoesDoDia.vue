@@ -8,17 +8,39 @@
       </div>
 
       <div class="CardapioPratos">
-        <router-link to="/opcoes-do-dia">
-          <div class="box"><p>Sushi e sashimis</p></div></router-link
-        >
 
-        <router-link to="/opcoes-do-dia">
-          <div class="box"><p>Pratos quentes</p></div></router-link
-        >
+        <div class="buscarProduto">
+         <select name="selecione" v-model="inputCategoria"  class="form-control" >
+              <option value="Selecione..." disabled selected="asasa" > Selecione</option>
+                  <option value="Shushi e Shashimis">Shushi e Shashimis</option>
+                 <option value="Pratos quentes">Pratos quentes</option>
+                 <option value="Sobremesas">Sobremesas</option> 
+        </select>
+       
+           <input
+              type="button" 
+              class="btn btn-dark"
+              @click="getCategoria()"
+              value="Buscar Categoria"
+               
+              />
 
-        <router-link to="/opcoes-do-dia">
-          <div class="box"><p>Sobremesas</p></div>
-        </router-link>
+        </div>
+
+        <div class="buscarProduto">
+          
+          <input class="form-control"  v-model="inputQuantidade"  type="number"  placeholder="Informe quantidade">    
+
+         <input
+              type="button" 
+              class="btn btn-dark"
+              @click="getQuantidade()"
+              value="Buscar Quantidade"
+               
+        />
+
+        </div>
+
       </div>
 
       <div class="OpcaoPratos">
@@ -55,7 +77,9 @@ export default {
   data() {
     return {
       pratos: [],
-      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+      inputCategoria: "",
+      inputQuantidade: "",
+      baseURI: "http://localhost:8080/api/produtos",
     };
   },
   components: {
@@ -67,6 +91,29 @@ export default {
         this.pratos = result.data;
       });
     },
+
+    getCategoria() {
+      this.$http
+        .get(this.baseURI + "/searchCategoria?categoria=" + this.inputCategoria)
+        .then((result) => {
+          this.pratos = result.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    getQuantidade() {
+      this.$http
+        .get(this.baseURI + "/searchQuantidade?quantidade=" + this.inputQuantidade)
+        .then((result) => {
+          this.pratos = result.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
   },
   mounted() {
     this.getProdutos();
@@ -111,6 +158,15 @@ export default {
   justify-content: space-evenly;
   height: auto;
   margin: 5px auto;
+}
+
+.CardapioPratos .buscarProduto {
+
+display: flex;
+}
+
+.form-control {
+  width: 200px;
 }
 
 .CardapioPratos a {

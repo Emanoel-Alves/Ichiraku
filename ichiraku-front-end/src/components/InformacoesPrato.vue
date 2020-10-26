@@ -7,22 +7,7 @@
         <router-link to="/opcoes-do-dia"> Voltar </router-link>
       </div>
 
-      <!-- <div class="CardapioPratos">
-          <a href="../pages/opcoesDoDia.html">
-            <div class="box"><p>Sushi e sashimis</p></div></a
-          >
-
-          <a href="../pages/opcoesDoDia.html">
-            <div class="box"><p>Pratos quentes</p></div></a
-          >
-          
-
-          <a href="../pages/opcoesDoDia.html">
-            <div class="box"><p>Sobremesas</p></div>
-            ></a
-          >
-        </div> -->
-
+     
       <div class="OpcaoPratos">
         <div class="Pratos">
           <!-- <div v-if="prato.id == post.id "> -->
@@ -34,7 +19,7 @@
 
             <div class="ingredientes">
               <h5>Categoria: {{ prato.categoria }}</h5>
-              <h4>Ingredientes {{ prato.ingredientes }}</h4>
+              <h4>Ingredientes: <p>{{ prato.ingredientes }}</p> </h4>
 
               <h3>R$ {{ prato.preco }}</h3>
 
@@ -70,7 +55,7 @@ export default {
       cesta: {},
       inputNome: "",
       inputPreco: null,
-      baseURI: "http://localhost:8080/ichiraku-back-and/api/produtos",
+      baseURI: "http://localhost:8080/api/produtos",
       baseURICesta: "http://localhost:8080/ichiraku-back-and/api/cestas",
     };
   },
@@ -199,7 +184,7 @@ export default {
 
 .InfoPrato .Pratos div h2 {
   font-size: 30px;
-  margin: 0;
+    margin: 20px  0 0 0;
 }
 .InfoPrato .Pratos div p {
   text-align: left;
@@ -208,7 +193,9 @@ export default {
 .InfoPrato .Pratos div h3 {
   font-size: 30px;
   color: #b40707;
-  margin: 0;
+  margin: 20px  0 0 0;
+  width: 100%;
+  text-align: center;
 }
 
 .InfoPrato .Pratos div .ingredientes {
@@ -218,7 +205,13 @@ export default {
   align-items: flex-start;
 }
 .InfoPrato .Pratos div .ingredientes h4 {
-  margin: 0;
+ margin: 20px  0 0 0;
+ 
+  
+}
+
+.InfoPrato .Pratos div .ingredientes h4  p {
+   font-size: 18px;
 }
 
 .InfoPrato .Pratos .add_produto {

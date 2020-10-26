@@ -41,7 +41,7 @@ export default {
     return {
       soma: 0,
       pedidos: [],
-      baseURI: "http://localhost:8080/ichiraku-back-and/api/pedidos",
+      baseURI: "http://localhost:8080/api/pedidos",
     };
   },
 
