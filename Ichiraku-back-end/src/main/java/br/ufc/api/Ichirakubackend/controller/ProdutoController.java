@@ -67,6 +67,7 @@ public class ProdutoController {
  
     @RequestMapping(method = RequestMethod.PUT, value = "{id}")
     public ResponseEntity<Produto> updateProduto(@PathVariable("id") Integer id, @RequestBody Produto produto) {
+    	System.out.println(produto.toString());
     	if (produto.getNome() == null || produto.getIngredientes() == null || produto.getCategoria() == null || produto.getPreco() == 0.0 
 				|| produto.getNome().equals("null") || produto.getIngredientes().equals("null") || produto.getCategoria().equals("null")) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
