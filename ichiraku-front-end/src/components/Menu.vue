@@ -88,6 +88,7 @@ h4 {
   width: auto;
   margin: 8px auto;
   text-align: center;
+  font-size: 20px;
 }
 
 .Menu .infoPerfil .img2 {
