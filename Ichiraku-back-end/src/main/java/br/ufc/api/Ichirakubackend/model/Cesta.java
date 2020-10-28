@@ -17,6 +17,12 @@ public class Cesta {
 	private String nomePrato;
 	private BigDecimal valorPrato;
 	
+	
+	public Cesta() {
+		super();
+		
+	}
+	
 	public Cesta(int id, Integer idPrato, Integer idUsuario, String nomePrato, BigDecimal valorPrato) {
 		super();
 		this.id = id;

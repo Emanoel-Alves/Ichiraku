@@ -12,7 +12,7 @@
         <div class="Pratos">
           <!-- <div v-if="prato.id == post.id "> -->
           <!-- {{ prato.id }} -->
-          <img :src="'../uploads/produto/' + prato.id + '.png'" alt="" />
+          <img :src="'../uploads/produtos/' + prato.id + '.png'" alt="" />
 
           <div>
             <h2>{{ prato.nome }}</h2>
@@ -56,7 +56,7 @@ export default {
       inputNome: "",
       inputPreco: null,
       baseURI: "http://localhost:8080/api/produtos",
-      baseURICesta: "http://localhost:8080/ichiraku-back-and/api/cestas",
+      baseURICesta: "http://localhost:8080/api/cesta",
     };
   },
   components: {
@@ -79,6 +79,7 @@ export default {
       this.cesta.valorPrato = Number(this.prato.preco);
 
       this.$http.post(this.baseURICesta, this.cesta).then((result) => {
+        console.log("olaaa", this.cesta);
         this.$router.push("/cesta");
       });
     },

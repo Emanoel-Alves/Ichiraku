@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.api.Ichirakubackend.model.Cesta;
@@ -40,6 +41,12 @@ public class CestaController {
 		}
         
     }
+    
+    @RequestMapping(method = RequestMethod.GET, value ="/searchUser")
+    public ResponseEntity <List<Cesta>> getByUsuario(@RequestParam("idUsuario") Integer idUsuario) {
+        return new ResponseEntity <List<Cesta>>(cestaService.getByUsuario(idUsuario), HttpStatus.OK);
+    }
+	
     
 //    @RequestMapping(method = RequestMethod.GET, value = "/searchQtd")
 //    public ResponseEntity<List<Carro>> getCarroByQuantity(@RequestParam("quantity") Integer quantity) {

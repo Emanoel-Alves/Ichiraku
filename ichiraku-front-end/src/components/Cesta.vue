@@ -10,14 +10,14 @@
          <div class="StatusPratos">
 
             <div class="titulo">        
-                <h4 > Prato  </h4>
+                <h4 class="prato"> Prato  </h4>
                 <h4 > Valor </h4>
 
             </div>
 
             <div class="Pedido" v-for="cesta in cestas " :key="cesta.id" > 
 
-                <img :src="'../uploads/produto/' + cesta.idPrato + '.png'" alt="" />
+                <img :src="'../uploads/produtos/' + cesta.idPrato + '.png'" alt="" />
 
                 <p> {{cesta.nomePrato}}</p>
   
@@ -67,8 +67,8 @@ data() {
       idUsuario: 1,
       cestas: [],
       pedido:{},
-      baseURI: "http://localhost:8080/ichiraku-back-and/api/cestas",
-      baseURIPedido: "http://localhost:8080/ichiraku-back-and/api/pedidos"
+      baseURI: "http://localhost:8080/api/cesta",
+      baseURIPedido: "http://localhost:8080/api/pedidos"
     };
   },
 
@@ -78,7 +78,7 @@ data() {
   methods: {
 
    getCesta() {
-         this.$http.get(this.baseURI + "/" + this.idUsuario ).then((result) => {
+         this.$http.get(this.baseURI + "/searchUser?idUsuario=" + this.idUsuario ).then((result) => {
          this.cestas = result.data;
         });
      },
@@ -186,15 +186,20 @@ section {
 }
 .titulo{
 
-    width: 88%;
+    width: 80%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: auto;
     margin: 10px auto;
     margin-left: 0;
     margin-bottom: 30px;
     background: white;
 
+}
+
+.titulo .prato {
+
+  margin-left: 15px;
 }
 
 .Pedido{
