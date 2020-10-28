@@ -1,27 +1,27 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../components/Home.vue";
-import CadastroProduto from "../components/CadastroProduto.vue";
-import InformacoesPrato from "../components/InformacoesPrato.vue";
-import OpcoesDoDia from "../components/OpcoesDoDia.vue";
-import TelaLogin from "../components/TelaLogin.vue";
-import TelaCadastro from "../components/TelaCadastro.vue";
-import Perfil from "../components/Perfil.vue";
-import Pedido from "../components/Pedido.vue";
-import Cesta from "../components/Cesta.vue";
+import Home from "../views/Home.vue";
+import CadastroProduto from "../views/CadastroProduto.vue";
+import InformacoesPrato from "../views/InformacoesPrato.vue";
+import OpcoesDoDia from "../views/OpcoesDoDia.vue";
+import TelaLogin from "../views/TelaLogin.vue";
+import TelaCadastro from "../views/TelaCadastro.vue";
+import Perfil from "../views/Perfil.vue";
+import Pedido from "../views/Pedido.vue";
+import Cesta from "../views/Cesta.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "*",
-    component: Home,
+    component: TelaLogin,
     meta: {
-      title: "Ichiraku - Home",
+      title: "Ichiraku - Login",
     },
   },
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
     meta: {
