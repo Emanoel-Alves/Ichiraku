@@ -11,7 +11,7 @@
     <div class="infoMenu">
       <div class="OpcoesMenu">
 
-        <router-link to="/">
+        <router-link to="/home">
          <i class="fas fa-vihara"></i> Home
         </router-link>
 
