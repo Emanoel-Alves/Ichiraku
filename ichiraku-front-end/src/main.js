@@ -9,8 +9,8 @@ Vue.prototype.$http = axios;
 Vue.use(VueSession);
 
 new Vue({
-  router,
-  render: function (h) {
-    return h(App);
-  },
+    router,
+    render: function(h) {
+        return h(App);
+    },
 }).$mount("#app");
