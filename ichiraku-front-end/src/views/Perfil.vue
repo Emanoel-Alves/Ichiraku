@@ -137,7 +137,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  background: #dfdfdf;
+  background: #EBEBEB;
 
   /* align-items: center; */
 }

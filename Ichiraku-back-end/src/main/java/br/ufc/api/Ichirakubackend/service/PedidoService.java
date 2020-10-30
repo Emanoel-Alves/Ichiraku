@@ -36,6 +36,10 @@ public class PedidoService {
 	        return pedidoRepository.findById(id).get();
 	 }
 	 
+	  public List<Pedido> getByUsuario(Integer idUser) {
+	        return pedidoRepository.findFirstByUsuario(idUser);
+	  }
+	 
 	 public Pedido updatePedido(int id, int idUser, String nome, double valorTotal) {
 	    	Pedido pedido = pedidoRepository.findById(id).get();
 	        
