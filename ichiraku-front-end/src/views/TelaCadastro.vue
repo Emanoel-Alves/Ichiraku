@@ -21,7 +21,9 @@
         /></label>
 
         <label for=""
-          >Senha * <p style="font-size:10px">Mínimo 8 caracteres</p><input v-model="senha" placeholder="Senha" type="password"
+          >Senha *
+          <p style="font-size: 10px">Mínimo 8 caracteres</p>
+          <input v-model="senha" placeholder="Senha" type="password"
         /></label>
 
         <input
@@ -115,8 +117,13 @@ export default {
       this.usuario.numero = "";
 
       alert("Usuário cadastrado!");
+
       this.$http.post(this.baseURI, this.usuario).then((result) => {
-        this.$router.push("/home");
+        if (result.status === 200) {
+          this.$session.start();
+          this.$session.set("usuario", JSON.stringify(result.data));
+          this.$router.push("/home");
+        }
       });
     },
   },

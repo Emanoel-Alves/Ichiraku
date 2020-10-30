@@ -17,7 +17,12 @@
           />
         </label>
 
-        <input class="botao" type="button" @click="checkForm()" value="Entrar" />
+        <input
+          class="botao"
+          type="button"
+          @click="checkForm()"
+          value="Entrar"
+        />
 
         <label style="display: flex; flex-direction: row" for=""
           >Não é cadastrado? <a href="/cadastro">Cadastre-se</a></label
@@ -43,9 +48,12 @@ export default {
       senha: null,
       usuario: {},
       usuarios: [],
+      logged: false,
       baseURI: "http://localhost:8080/api/usuarios",
     };
   },
+
+  
 
   methods: {
     checkForm: function () {
@@ -53,11 +61,10 @@ export default {
       // email.value.indexOf("@") == -1 ||
       // email.value.indexOf(".") == -1 ||
       // senha.value.length < 8
-      if ((this.email.trim() !== "") && (this.senha.trim() !== "")) {
+      if (this.email.trim() !== "" && this.senha.trim() !== "") {
         this.getUsuario();
         // alert("Por favor, revise seu e-mail ou senha!");
-      }
-      else{
+      } else {
         alert("Insira os dados, por favor");
       }
     },
@@ -67,25 +74,23 @@ export default {
         .get(this.baseURI + "/search?email=" + this.email)
         .then((result) => {
           this.usuarios = result.data;
-          console.log(this.usuarios);
+          //console.log(this.usuarios);
           // console.log(this.usuarios[0].email);
           if (this.usuarios.length != 0) {
             if (this.senha !== this.usuarios[0].senha) {
               alert("A Senha não corresponde ao email informado!");
-            }else{
-              this.$router.push("/home");
+            } else {
+              if (result.status === 200) {
+                this.$session.start();
+                this.$session.set("usuario", JSON.stringify(result.data));
+                this.$router.push("/home");
+              }
             }
           } else {
             alert("Usuário com email não existe");
           }
         });
     },
-
-    //});
-    //},
-    // created() {
-    // this.getUsuarios();
-    //},
   },
 };
 </script>

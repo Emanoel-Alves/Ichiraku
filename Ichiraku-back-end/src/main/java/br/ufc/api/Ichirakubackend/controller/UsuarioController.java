@@ -62,7 +62,8 @@ public class UsuarioController {
 
 		if (newUsuario.getNome() == null || newUsuario.getEmail() == null || newUsuario.getSenha() == null
 				|| newUsuario.getNome().equals("null") || newUsuario.getEmail().equals("null")
-				|| newUsuario.getSenha().equals("null")) {
+				|| newUsuario.getSenha().equals("null") || newUsuario.getSenha().length() <= 7
+				|| newUsuario.getNome().length() <= 4) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
@@ -73,12 +74,12 @@ public class UsuarioController {
 
 	@RequestMapping(method = RequestMethod.PUT, value = "{id}")
 	public ResponseEntity<Usuario> updateUsuario(@PathVariable("id") Integer id, @RequestBody Usuario usuario) {
-
+		System.out.println(usuario.toString());
 		if (usuario.getNome() == null || usuario.getEmail() == null || usuario.getSenha() == null
 				|| usuario.getNome().equals("null") || usuario.getEmail().equals("null")
 				|| usuario.getSenha().equals("null") || usuario.getCidade().equals("null")
 				|| usuario.getBairro().equals("null") || usuario.getRua().equals("null")
-				|| usuario.getNumero().equals("null") || usuario.getSobrenome().equals("null")){
+				|| usuario.getNumero().equals("null") || usuario.getSobrenome().equals("null") || usuario.getSenha().length() <= 7 || usuario.getNome().length() <= 4){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
