@@ -44,19 +44,16 @@ public class CestaController {
     
     @RequestMapping(method = RequestMethod.GET, value ="/searchUser")
     public ResponseEntity <List<Cesta>> getByUsuario(@RequestParam("idUsuario") Integer idUsuario) {
-        return new ResponseEntity <List<Cesta>>(cestaService.getByUsuario(idUsuario), HttpStatus.OK);
+    	
+    	List<Cesta> itens = cestaService.getByUsuario(idUsuario);
+
+		if (itens != null) {
+			  return new ResponseEntity <List<Cesta>>(itens , HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
     }
-	
-    
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchQtd")
-//    public ResponseEntity<List<Carro>> getCarroByQuantity(@RequestParam("quantity") Integer quantity) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByQuantity(quantity), HttpStatus.OK);
-//    }
-//    
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchMrc")
-//    public ResponseEntity<List<Carro>> getCarroByMarca(@RequestParam("marca") String marca) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByMarca(marca), HttpStatus.OK);
-//    }
+	   
  
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Cesta> saveItem(@RequestBody Cesta newItem) {

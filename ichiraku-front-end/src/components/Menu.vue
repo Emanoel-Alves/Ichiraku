@@ -37,8 +37,8 @@
         </router-link>
       </div>
 
-       <div class="MenuSair">
-       <router-link to="/login">
+       <div class="MenuSair" @click="Logout()">
+       <router-link to="/login" >
         <i class="fas fa-sign-out-alt"></i> Logout
         </router-link>
        </div>
@@ -51,6 +51,13 @@
 export default {
   name: "Menu",
   components: {},
+
+  methods: {
+    Logout() {
+        this.$session.destroy();
+        location.reload();
+    }
+  },
 };
 </script>
 

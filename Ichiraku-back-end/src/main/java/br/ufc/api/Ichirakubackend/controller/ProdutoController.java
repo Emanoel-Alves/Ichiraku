@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import br.ufc.api.Ichirakubackend.model.Produto;
 import br.ufc.api.Ichirakubackend.service.ProdutoService;
 
@@ -46,12 +47,26 @@ public class ProdutoController {
     
     @RequestMapping(method = RequestMethod.GET, value = "/searchCategoria")
     public ResponseEntity <List<Produto>> getFuncionarioByCategoria(@RequestParam("categoria") String categoria) {
-        return new ResponseEntity <List<Produto>>(produtoService.getFuncionarioByCategoria(categoria), HttpStatus.OK);
+    	
+    List<Produto> itens = produtoService.getFuncionarioByCategoria(categoria);
+
+		if (itens != null) {
+        return new ResponseEntity <List<Produto>>( itens , HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
     }
 	
     @RequestMapping(method = RequestMethod.GET, value = "/searchQuantidade")
     public ResponseEntity <List<Produto>> getFuncionarioByQuantidade(@RequestParam("quantidade") Integer quantidade) {
-        return new ResponseEntity <List<Produto>>(produtoService.getFuncionarioByQuantidade(quantidade), HttpStatus.OK);
+    	
+    List<Produto> itens = produtoService.getFuncionarioByQuantidade(quantidade);
+
+ 		if (itens != null) {
+        return new ResponseEntity <List<Produto>>( itens , HttpStatus.OK);
+ 		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
     }
  
     @RequestMapping(method = RequestMethod.POST)

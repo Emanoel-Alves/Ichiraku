@@ -53,6 +53,8 @@ export default {
     return {
       prato: [],
       cesta: {},
+      usuario: {},
+      idUsuario: "",
       inputNome: "",
       inputPreco: null,
       baseURI: "http://localhost:8080/api/produtos",
@@ -69,12 +71,15 @@ export default {
         .get(this.baseURI + "/" + this.$route.params.idPrato)
         .then((result) => {
           this.prato = result.data;
-        });
+        });   
     },
 
     postCesta() {
+      this.usuario = JSON.parse(this.$session.get("usuario"));
+      this.idUsuario = this.usuario[0].id;
+
       this.cesta.idPrato = this.prato.id;
-      this.cesta.idUsuario = 1;
+      this.cesta.idUsuario = this.idUsuario
       this.cesta.nomePrato = this.prato.nome;
       this.cesta.valorPrato = Number(this.prato.preco);
 
