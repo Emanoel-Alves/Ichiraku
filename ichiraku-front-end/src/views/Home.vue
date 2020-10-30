@@ -19,14 +19,14 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+
 import Menu from "@/components/Menu.vue";
 
 export default {
   name: "Home",
   components: {
     Menu,
-    HelloWorld
+  
   },
 };
 </script>

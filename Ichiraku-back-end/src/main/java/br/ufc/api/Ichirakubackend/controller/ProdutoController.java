@@ -44,15 +44,15 @@ public class ProdutoController {
         
     }
     
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchQtd")
-//    public ResponseEntity<List<Carro>> getCarroByQuantity(@RequestParam("quantity") Integer quantity) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByQuantity(quantity), HttpStatus.OK);
-//    }
-//    
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchMrc")
-//    public ResponseEntity<List<Carro>> getCarroByMarca(@RequestParam("marca") String marca) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByMarca(marca), HttpStatus.OK);
-//    }
+    @RequestMapping(method = RequestMethod.GET, value = "/searchCategoria")
+    public ResponseEntity <List<Produto>> getFuncionarioByCategoria(@RequestParam("categoria") String categoria) {
+        return new ResponseEntity <List<Produto>>(produtoService.getFuncionarioByCategoria(categoria), HttpStatus.OK);
+    }
+	
+    @RequestMapping(method = RequestMethod.GET, value = "/searchQuantidade")
+    public ResponseEntity <List<Produto>> getFuncionarioByQuantidade(@RequestParam("quantidade") Integer quantidade) {
+        return new ResponseEntity <List<Produto>>(produtoService.getFuncionarioByQuantidade(quantidade), HttpStatus.OK);
+    }
  
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Produto> saveProduto(@RequestBody Produto newProduto) {
