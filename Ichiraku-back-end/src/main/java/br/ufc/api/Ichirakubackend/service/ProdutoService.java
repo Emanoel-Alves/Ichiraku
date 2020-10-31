@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import br.ufc.api.Ichirakubackend.model.Produto;
 import br.ufc.api.Ichirakubackend.repository.ProdutoRepository;
 
-
 @Service
 public class ProdutoService {
 	
@@ -36,14 +35,14 @@ public class ProdutoService {
         return produtoRepository.findById(id).get();
     }
     
-//    public List<Produto> getCarroByQuantity(Integer quantity) {
-//        return carroRepository.findByQuantity(quantity);
-//    }
+    public List<Produto> getFuncionarioByCategoria(String categoria) {
+        return produtoRepository.findFirstByCategoria(categoria);
+    }
     
-//    public List<Carro> getCarroByMarca(String marca) {
-//        return carroRepository.findByMarca(marca);
-//    }
-    
+    public List<Produto> getFuncionarioByQuantidade(Integer quantidade) {
+        return produtoRepository.findFirstByQuantidade(quantidade);
+    }
+      
     public Produto updateProduto(int id, String nome, String ingredientes, double preco, String categoria) {
     	Produto produto = produtoRepository.findById(id).get();
         

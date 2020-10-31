@@ -50,7 +50,12 @@ export default {
   },
   methods: {
     getPedidos() {
-      this.$http.get(this.baseURI).then((result) => {
+      this.usuario = JSON.parse(this.$session.get("usuario"));
+      this.idUsuario = this.usuario[0].id;
+
+      console.log('valor', this.idUsuario)
+
+      this.$http.get(this.baseURI + "/searchUser?idUser=" + this.idUsuario ).then((result) => {
         this.pedidos = result.data;
       });
     },

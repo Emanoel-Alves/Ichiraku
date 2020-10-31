@@ -35,4 +35,8 @@ public class CestaService {
         return cestaRepository.findById(id).get();
     }
     
+    public List<Cesta> getByUsuario(Integer idUsuario) {
+        return cestaRepository.findFirstByUsuario(idUsuario);
+    }
+
 }

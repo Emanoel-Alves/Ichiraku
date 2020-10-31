@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.api.Ichirakubackend.model.Pedido;
@@ -44,6 +45,19 @@ public class PedidoController {
 		}
 	        
 	  }
+	 
+	 @RequestMapping(method = RequestMethod.GET, value ="/searchUser")
+	    public ResponseEntity <List<Pedido>> getByUsuario(@RequestParam("idUser") Integer idUser) {
+		 		 
+		 List<Pedido> itens = pedidoService.getByUsuario(idUser);
+
+			if (itens != null) {
+	        return new ResponseEntity <List<Pedido>>(itens , HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+	  }
+	 
 	 
 	 @RequestMapping(method = RequestMethod.POST)
 	    public ResponseEntity<Pedido> savePedido(@RequestBody Pedido newPedido) {

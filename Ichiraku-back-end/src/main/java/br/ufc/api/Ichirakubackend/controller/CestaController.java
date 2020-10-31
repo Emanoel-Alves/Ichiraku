@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufc.api.Ichirakubackend.model.Cesta;
@@ -41,15 +42,18 @@ public class CestaController {
         
     }
     
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchQtd")
-//    public ResponseEntity<List<Carro>> getCarroByQuantity(@RequestParam("quantity") Integer quantity) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByQuantity(quantity), HttpStatus.OK);
-//    }
-//    
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchMrc")
-//    public ResponseEntity<List<Carro>> getCarroByMarca(@RequestParam("marca") String marca) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByMarca(marca), HttpStatus.OK);
-//    }
+    @RequestMapping(method = RequestMethod.GET, value ="/searchUser")
+    public ResponseEntity <List<Cesta>> getByUsuario(@RequestParam("idUsuario") Integer idUsuario) {
+    	
+    	List<Cesta> itens = cestaService.getByUsuario(idUsuario);
+
+		if (itens != null) {
+			  return new ResponseEntity <List<Cesta>>(itens , HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+    }
+	   
  
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Cesta> saveItem(@RequestBody Cesta newItem) {

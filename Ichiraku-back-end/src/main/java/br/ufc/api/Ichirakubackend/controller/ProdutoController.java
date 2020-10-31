@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import br.ufc.api.Ichirakubackend.model.Produto;
 import br.ufc.api.Ichirakubackend.service.ProdutoService;
 
@@ -44,15 +45,29 @@ public class ProdutoController {
         
     }
     
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchQtd")
-//    public ResponseEntity<List<Carro>> getCarroByQuantity(@RequestParam("quantity") Integer quantity) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByQuantity(quantity), HttpStatus.OK);
-//    }
-//    
-//    @RequestMapping(method = RequestMethod.GET, value = "/searchMrc")
-//    public ResponseEntity<List<Carro>> getCarroByMarca(@RequestParam("marca") String marca) {
-//        return new ResponseEntity<List<Carro>>(carroService.getCarroByMarca(marca), HttpStatus.OK);
-//    }
+    @RequestMapping(method = RequestMethod.GET, value = "/searchCategoria")
+    public ResponseEntity <List<Produto>> getFuncionarioByCategoria(@RequestParam("categoria") String categoria) {
+    	
+    List<Produto> itens = produtoService.getFuncionarioByCategoria(categoria);
+
+		if (itens != null) {
+        return new ResponseEntity <List<Produto>>( itens , HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+    }
+	
+    @RequestMapping(method = RequestMethod.GET, value = "/searchQuantidade")
+    public ResponseEntity <List<Produto>> getFuncionarioByQuantidade(@RequestParam("quantidade") Integer quantidade) {
+    	
+    List<Produto> itens = produtoService.getFuncionarioByQuantidade(quantidade);
+
+ 		if (itens != null) {
+        return new ResponseEntity <List<Produto>>( itens , HttpStatus.OK);
+ 		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+    }
  
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Produto> saveProduto(@RequestBody Produto newProduto) {

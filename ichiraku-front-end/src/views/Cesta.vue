@@ -10,7 +10,7 @@
          <div class="StatusPratos">
 
             <div class="titulo">        
-                <h4 > Prato  </h4>
+                <h4 class="prato"> Prato  </h4>
                 <h4 > Valor </h4>
 
             </div>
@@ -19,10 +19,10 @@
 
                 <img :src="'../uploads/produtos/' + cesta.idPrato + '.png'" alt="" />
 
-                <p> {{cesta.nomePrato}}</p>
-  
-                <p>{{cesta.valorPrato}}</p>
-            
+                <div class="nomePrato">
+                  <p > {{cesta.nomePrato}}</p>
+                  <p class="preco">{{cesta.valorPrato}}</p>
+               </div>
                 <a
                 @click="deleteCesta(cesta.id)"
                 class="btn btn-danger button-delete"
@@ -64,11 +64,11 @@ name: "Cesta",
 data() {
     return {
       soma: 0,
-      idUsuario: 1,
+      idUsuario: "",
       cestas: [],
       pedido:{},
-      baseURI: "http://localhost:8080/ichiraku-back-and/api/cestas",
-      baseURIPedido: "http://localhost:8080/ichiraku-back-and/api/pedidos"
+      baseURI: "http://localhost:8080/api/cesta",
+      baseURIPedido: "http://localhost:8080/api/pedidos"
     };
   },
 
@@ -77,14 +77,20 @@ data() {
   },
   methods: {
 
-   getCesta() {
-         this.$http.get(this.baseURI + "/" + this.idUsuario ).then((result) => {
+   getCesta() {    
+      this.usuario = JSON.parse(this.$session.get("usuario"));
+      this.idUsuario = this.usuario[0].id;
+
+         this.$http.get(this.baseURI + "/searchUser?idUsuario=" + this.idUsuario ).then((result) => {
          this.cestas = result.data;
         });
      },
 
     postPedido() {
-      this.pedido.idUser = 1;
+      this.usuario = JSON.parse(this.$session.get("usuario"));
+      this.idUsuario = this.usuario[0].id;
+
+      this.pedido.idUser = this.idUsuario;
       this.pedido.nome = "";
       this.pedido.valorTotal = 0;
 
@@ -186,9 +192,9 @@ section {
 }
 .titulo{
 
-    width: 88%;
+    width: 80%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: auto;
     margin: 10px auto;
     margin-left: 0;
@@ -197,11 +203,16 @@ section {
 
 }
 
+.titulo .prato {
+
+  margin-left: 15px;
+}
+
 .Pedido{
 
-    width: 80%;
+    width: 85%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     height: auto;
     margin: 10px auto;
@@ -216,7 +227,20 @@ section {
   height: 80px;
 }
 
+.nomePrato {
 
+  display: flex;
+}
+
+.nomePrato p{
+  text-align: left;
+  width: 150px;
+}
+
+.nomePrato .preco {
+  margin-left: 55px;
+  width: 70px;
+}
 
 .butão {
     width: 80%;
