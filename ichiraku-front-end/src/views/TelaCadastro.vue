@@ -126,6 +126,13 @@ export default {
       });
     },
   },
+
+  mounted() {
+   
+    if (this.$session.exists()) {
+        this.$router.push("/home");
+    }   
+ },
 };
 </script>
 
