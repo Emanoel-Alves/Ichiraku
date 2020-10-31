@@ -113,13 +113,14 @@ export default {
       this.usuario.bairro = "";
       this.usuario.rua = "";
       this.usuario.numero = "";
+      this.usuario.imagem = false;
 
       alert("Usuário cadastrado!");
 
       this.$http.post(this.baseURI, this.usuario).then((result) => {
         if (result.status === 200) {
           this.$session.start();
-          this.$session.set("usuario", JSON.stringify(result.data));
+          this.$session.set("usuario", JSON.stringify([result.data]));
           this.$router.push("/home");
         }
       });

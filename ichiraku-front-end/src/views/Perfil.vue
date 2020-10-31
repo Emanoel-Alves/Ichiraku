@@ -4,8 +4,28 @@
     <form class="form-perfil" action="">
       <p>Perfil</p>
       <div class="imageUser">
-        <i class="fas fa-user-alt"></i>
+
+        <i v-if="usuarioPerfil.imagem == false" class="fas fa-user-alt"></i>
+        <img v-else :src="'../uploads/usuarios/' + usuarioPerfil.id + '.png'" alt="">
+
+        <label class="inputImag" for=""
+        ><input
+        value="text"
+          name="imagem"
+          id="file"
+          ref="file"
+          class="file_customizado"
+          type="file"
+          accept="image/*"
+           @change="addImagem()"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor, selecione uma imagem.
+        </div></label
+      >
       </div>
+      
       <label
         >Nome: <input v-model="usuarioPerfil.nome" value="Emanoel"
       /></label>
@@ -70,11 +90,35 @@ export default {
       usuario: {},
       id: "",
       usuarioPerfil: {},
+      imagem: false,
       baseURI: "http://localhost:8080/api/usuarios",
+      baseUploadURI: "http://localhost:8080/upload",
     };
   },
 
   methods: {
+      addImagem() {
+        this.imagem = true;
+        console.log( this.usuarioPerfil.imagem);
+      },
+       handleFileUpload(id) {
+        this.file = this.$refs.file.files[0];
+
+        let form = new FormData();
+        form.append("resource", "usuarios");
+        form.append("id", id);
+        form.append("file", this.file);
+
+        this.$http
+          .post(this.baseUploadURI, form, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((result) => {
+            console.log(result);
+          });
+      },
     getUsuario() {
       this.usuario = JSON.parse(this.$session.get("usuario"));
       this.id = this.usuario[0].id;
@@ -92,6 +136,7 @@ export default {
         if (this.usuarioPerfil.nome.length > 4) {
           if (this.usuarioPerfil.email.indexOf("@") != -1) {
             if (this.usuarioPerfil.senha.length > 7) {
+               this.usuarioPerfil.imagem = this.imagem;
               this.$http
                 .put(
                   this.baseURI + "/" + this.usuarioPerfil.id,
@@ -99,6 +144,7 @@ export default {
                 )
                 .then((result) => {
                   if (result.status === 200) {
+                     this.handleFileUpload(result.data.id);
                     alert("Perfil atualizado");
                   }
                 });
@@ -155,6 +201,11 @@ export default {
   font-family: Helvetica, sans-serif, Arial;
 }
 
+.file_customizado {
+  margin-top: 15px;
+  /* width: 50; */
+}
+
 .form-perfil > label {
   display: flex;
   margin-bottom: 10px;
@@ -209,14 +260,24 @@ p:nth-child(2) {
 }
 
 .imageUser {
+  display: flex;
+  flex-direction: column;
   margin-top: 0%;
   border-radius: 100%;
   margin-bottom: 4%;
+  align-items: center;
+  
   /* margin-top: 20%; */
 }
 
 .imageUser > i {
   font-size: 5rem;
+}
+
+.imageUser > img {
+  width: 150px;
+  height: 150px;
+  border-radius: 100% ;
 }
 
 .userName {
