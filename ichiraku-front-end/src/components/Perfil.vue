@@ -10,7 +10,7 @@
 
       <label>Sobrenome:<input value="Alves"/></label>
 
-      <label>Email: <input value="emanoel-alves@hotmail.com"/></label>
+      <label>Email: <input value="emanoel-alves@hotmail.com" /></label>
 
       <div class="divLine"></div>
       <p>Endereço</p>
