@@ -102,9 +102,7 @@ export default {
     getUsuario() {
       this.usuario = JSON.parse(this.$session.get("usuario"));
       this.id = this.usuario[0].id;
-
-      console.log(this.usuario[0].id);
-
+      //console.log(this.usuario[0].id);
       this.$http.get(this.baseURI + "/" + this.id).then((result) => {
         this.usuarioPerfil = result.data;
       });
