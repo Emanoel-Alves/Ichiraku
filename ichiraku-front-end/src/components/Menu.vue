@@ -3,7 +3,8 @@
     <div class="infoPerfil">
       <img src="../assets/logo.png" alt="" class="img1" />
 
-      <img src="../assets/user.png" alt="Imagem perfil" class="img2" />
+      <img v-if="usuarioPerfil.imagem === false" src="../assets/user.png" alt="Imagem perfil" class="img2" />
+       <img v-else class="imageUser" :src="'../uploads/usuarios/' + usuarioPerfil.id + '.png'" alt="">
 
       <h4>{{ usuarioPerfil.nome }}</h4>
     </div>
@@ -93,10 +94,16 @@ export default {
   height: 40%;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   background-color: #840705;
 
   color: white;
+}
+
+.imageUser{
+  width: 100px;
+  height: 100px;
+  border-radius: 100% ;
 }
 
 .Menu .infoMenu {
@@ -130,7 +137,7 @@ h4 {
   width: 130px;
   height: 42px;
   margin: 10px auto;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .Menu .infoMenu .OpcoesMenu {
