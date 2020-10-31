@@ -69,7 +69,7 @@ public class UsuarioController {
 
 		return new ResponseEntity<Usuario>(usuarioService.addUsuario(newUsuario.getNome(), newUsuario.getSobrenome(),
 				newUsuario.getEmail(), newUsuario.getSenha(), newUsuario.getCidade(), newUsuario.getBairro(),
-				newUsuario.getRua(), newUsuario.getNumero()), HttpStatus.OK);
+				newUsuario.getRua(), newUsuario.getNumero(), newUsuario.getImagem()), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "{id}")
@@ -85,7 +85,7 @@ public class UsuarioController {
 
 		return new ResponseEntity<Usuario>(usuarioService.updateUsuario(usuario.getId(), usuario.getNome(), usuario.getSobrenome(),
 				usuario.getEmail(), usuario.getSenha(), usuario.getCidade(), usuario.getBairro(), usuario.getRua(),
-				usuario.getNumero()), HttpStatus.OK);
+				usuario.getNumero(), usuario.getImagem()), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "{id}")

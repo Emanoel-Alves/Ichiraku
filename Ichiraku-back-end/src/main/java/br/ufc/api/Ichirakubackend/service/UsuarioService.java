@@ -15,8 +15,8 @@ public class UsuarioService {
     UsuarioRepository usuarioRepo;
     
     public Usuario addUsuario(String nome, String sobrenome, String email, String senha, String cidade, String bairro,
-			String rua, String numero) {
-    	Usuario usuario = new Usuario(nome, sobrenome, email, senha, cidade, bairro, rua, numero);
+			String rua, String numero, boolean imagem) {
+    	Usuario usuario = new Usuario(nome, sobrenome, email, senha, cidade, bairro, rua, numero, imagem);
     	System.out.println(usuario.toString());
         return usuarioRepo.save(usuario);
     }
@@ -43,7 +43,7 @@ public class UsuarioService {
     }
     
     public Usuario updateUsuario(Integer id, String nome, String sobrenome, String email, String senha, String cidade, String bairro,
-			String rua, String numero) {
+			String rua, String numero, boolean imagem) {
         Usuario usuarioAux = usuarioRepo.findById(id).get();
         
         if(usuarioAux != null) {
@@ -55,6 +55,7 @@ public class UsuarioService {
             usuarioAux.setBairro(bairro);
             usuarioAux.setRua(rua);
             usuarioAux.setNumero(numero);
+            usuarioAux.setImagem(imagem);
             
             usuarioRepo.save(usuarioAux);         
         }

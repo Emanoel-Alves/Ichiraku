@@ -18,7 +18,15 @@ public class Usuario {
     String bairro;
     String rua;
     String numero;
+    boolean imagem;
     
+    
+	public boolean getImagem() {
+		return imagem;
+	}
+	public void setImagem(boolean imagem) {
+		this.imagem = imagem;
+	}
 	public int getId() {
 		return id;
 	}
@@ -73,8 +81,9 @@ public class Usuario {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
+	
 	public Usuario(int id, String nome, String sobrenome, String email, String senha, String cidade, String bairro,
-			String rua, String numero) {
+			String rua, String numero, boolean imagem) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -85,10 +94,11 @@ public class Usuario {
 		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
+		this.imagem = imagem;
 	}
 	
 	public Usuario(String nome, String sobrenome, String email, String senha, String cidade, String bairro,
-			String rua, String numero) {
+			String rua, String numero,  boolean imagem) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -98,6 +108,7 @@ public class Usuario {
 		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
+		this.imagem = imagem;
 	}
 	
 	public Usuario() {
@@ -107,7 +118,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", senha="
-				+ senha + ", cidade=" + cidade + ", bairro=" + bairro + ", rua=" + rua + ", numero=" + numero + "]";
+				+ senha + ", cidade=" + cidade + ", bairro=" + bairro + ", rua=" + rua + ", numero=" + numero + ", imagem=" + imagem + "]";
 	}
 	
 	

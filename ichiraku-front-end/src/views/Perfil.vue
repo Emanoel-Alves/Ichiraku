@@ -5,7 +5,23 @@
       <p>Perfil</p>
       <div class="imageUser">
         <i class="fas fa-user-alt"></i>
+        <label class="inputImag" for=""
+        ><input
+        value="text"
+          name="imagem"
+          id="file"
+          ref="file"
+          class="file_customizado"
+          type="file"
+          accept="image/*"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor, selecione uma imagem.
+        </div></label
+      >
       </div>
+      
       <label
         >Nome: <input v-model="usuarioPerfil.nome" value="Emanoel"
       /></label>
@@ -157,6 +173,11 @@ export default {
   font-family: Helvetica, sans-serif, Arial;
 }
 
+.file_customizado {
+  margin-top: 15px;
+  /* width: 50; */
+}
+
 .form-perfil > label {
   display: flex;
   margin-bottom: 10px;
@@ -211,6 +232,8 @@ p:nth-child(2) {
 }
 
 .imageUser {
+  display: flex;
+  flex-direction: column;
   margin-top: 0%;
   border-radius: 100%;
   margin-bottom: 4%;

@@ -5,7 +5,7 @@
 
       <img src="../assets/user.png" alt="Imagem perfil" class="img2" />
 
-      <h4>Nome do usuário</h4>
+      <h4>{{ usuarioPerfil.nome }}</h4>
     </div>
 
     <div class="infoMenu">
@@ -50,13 +50,34 @@
 <script >
 export default {
   name: "Menu",
+  data(){
+    return {
+      usuarioPerfil: {},
+      baseURI: "http://localhost:8080/api/usuarios",
+      id: "",
+    }
+  },
   components: {},
 
   methods: {
     Logout() {
         this.$session.destroy();
         location.reload();
-    }
+    }, 
+    getUsuario() {
+      this.usuario = JSON.parse(this.$session.get("usuario"));
+      this.id = this.usuario[0].id;
+
+      console.log(this.usuario[0].id);
+
+      this.$http.get(this.baseURI + "/" + this.id).then((result) => {
+        this.usuarioPerfil = result.data;
+        console.log(this.usuarioPerfil.name);
+      });
+    },
+  },
+  created: function () {
+    this.getUsuario();
   },
 };
 </script>
