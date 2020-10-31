@@ -7,7 +7,7 @@
         <i class="fas fa-user-alt"></i>
         <label class="inputImag" for=""
         ><input
-        value="text"
+          
           name="imagem"
           id="file"
           ref="file"
@@ -30,7 +30,6 @@
         >Sobrenome:<input v-model="usuarioPerfil.sobrenome" value="Alves"
       /></label>
 
-<<<<<<< HEAD:ichiraku-front-end/src/views/Perfil.vue
       <label
         >Email:
         <input v-model="usuarioPerfil.email" value="emanoel-alves@hotmail.com"
@@ -39,9 +38,6 @@
       <label
         >Senha: <input v-model="usuarioPerfil.senha" type="password"
       /></label>
-=======
-      <label>Email: <input value="emanoel-alves@hotmail.com" /></label>
->>>>>>> issue2:ichiraku-front-end/src/components/Perfil.vue
 
       <div class="divLine"></div>
       <p>Endereço</p>
@@ -55,13 +51,9 @@
         >Rua: <input v-model="usuarioPerfil.rua" value="Bernardino Gomes"
       /></label>
 
-<<<<<<< HEAD:ichiraku-front-end/src/views/Perfil.vue
       <label style="margin-bottom: 5%"
         >Número: <input v-model="usuarioPerfil.numero" value="000"
       /></label>
-=======
-      <label style="margin-bottom: 5%" >Número: <input value="000"/></label>
->>>>>>> issue2:ichiraku-front-end/src/components/Perfil.vue
       <div class="buttonsContent">
         <!-- <button class="button-perfil button1"> -->
         <input
