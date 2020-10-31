@@ -144,7 +144,7 @@ export default {
 .form1 > label {
   display: flex;
   flex-direction: column;
-
+  align-items: baseline;
   margin-bottom: 4%;
 }
 
