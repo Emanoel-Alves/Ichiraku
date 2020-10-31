@@ -55,15 +55,13 @@ export default {
       usuario: {},
       usuarios: null,
       baseURI: "http://localhost:8080/api/usuarios",
-      //reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+      
+      
     };
   },
 
   methods: {
-    // isEmailValid: function() {
-    //   return (this.email == "")? "" : (this.reg.test(this.email)) ? 'has-success' : 'has-error';
-    // },
-
+    
     getUsuarios: function () {
       if (
         this.nome.trim() !== "" &&
@@ -71,7 +69,7 @@ export default {
         this.senha.trim() !== ""
       ) {
         if (this.nome.length > 4) {
-          if (this.email.indexOf("@") != -1) {
+          if (this.email.length > 0 && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
             if (this.senha.length > 7) {
               this.$http
                 .get(this.baseURI + "/search?email=" + this.email)

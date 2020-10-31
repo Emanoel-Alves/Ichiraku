@@ -58,12 +58,8 @@ export default {
   methods: {
     checkForm: function () {
       this.errors = [];
-      // email.value.indexOf("@") == -1 ||
-      // email.value.indexOf(".") == -1 ||
-      // senha.value.length < 8
       if (this.email.trim() !== "" && this.senha.trim() !== "") {
         this.getUsuario();
-        // alert("Por favor, revise seu e-mail ou senha!");
       } else {
         alert("Insira os dados, por favor");
       }
