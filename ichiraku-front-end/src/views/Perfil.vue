@@ -5,27 +5,64 @@
       <p>Perfil</p>
       <div class="imageUser">
         <i class="fas fa-user-alt"></i>
+        <label class="inputImag" for=""
+        ><input
+          
+          name="imagem"
+          id="file"
+          ref="file"
+          class="file_customizado"
+          type="file"
+          accept="image/*"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor, selecione uma imagem.
+        </div></label
+      >
       </div>
-      <label>Nome: <input value="Emanoel"/></label>
+      
+      <label
+        >Nome: <input v-model="usuarioPerfil.nome" value="Emanoel"
+      /></label>
 
-      <label>Sobrenome:<input value="Alves"/></label>
+      <label
+        >Sobrenome:<input v-model="usuarioPerfil.sobrenome" value="Alves"
+      /></label>
 
-      <label>Email: <input value="emanoel-alves@hotmail.com"/></label>
+      <label
+        >Email:
+        <input v-model="usuarioPerfil.email" value="emanoel-alves@hotmail.com"
+      /></label>
+
+      <label
+        >Senha: <input v-model="usuarioPerfil.senha" type="password"
+      /></label>
 
       <div class="divLine"></div>
       <p>Endereço</p>
-      <label>Cidade: <input value="Poranga"/></label>
+      <label>Cidade: <input v-model="usuarioPerfil.id" /></label>
 
-      <label>Bairro: <input value="Betânia"/></label>
+      <label
+        >Bairro: <input v-model="usuarioPerfil.bairro" value="Betânia"
+      /></label>
 
-      <label>Rua: <input value="Bernardino Gomes"/></label>
+      <label
+        >Rua: <input v-model="usuarioPerfil.rua" value="Bernardino Gomes"
+      /></label>
 
-      <label style="margin-bottom: 5%" >Número: <input value="000"/></label>
+      <label style="margin-bottom: 5%"
+        >Número: <input v-model="usuarioPerfil.numero" value="000"
+      /></label>
       <div class="buttonsContent">
         <!-- <button class="button-perfil button1"> -->
-        <router-link class="button-perfil button1" to="/home"
-          >Salvar</router-link
-        >
+        <input
+          type="button"
+          class="button-perfil button1"
+          @click="putUsuario()"
+          value="Salvar"
+        />
+
         <!-- </button> -->
 
         <router-link class="button-perfil button2" to="/home"
@@ -44,6 +81,62 @@ export default {
   components: {
     Menu,
   },
+  data() {
+    return {
+      usuario: {},
+      id: "",
+      usuarioPerfil: {},
+      baseURI: "http://localhost:8080/api/usuarios",
+    };
+  },
+
+  methods: {
+    getUsuario() {
+      this.usuario = JSON.parse(this.$session.get("usuario"));
+      this.id = this.usuario[0].id;
+
+      console.log(this.usuario[0].id);
+
+      this.$http.get(this.baseURI + "/" + this.id).then((result) => {
+        this.usuarioPerfil = result.data;
+      });
+    },
+    putUsuario() {
+      if (
+        this.usuarioPerfil.nome.trim() !== "" &&
+        this.usuarioPerfil.email.trim() !== "" &&
+        this.usuarioPerfil.senha.trim() !== ""
+      ) {
+        if (this.usuarioPerfil.nome.length > 4) {
+          if (this.usuarioPerfil.email.indexOf("@") != -1) {
+            if (this.usuarioPerfil.senha.length > 7) {
+              this.$http
+                .put(
+                  this.baseURI + "/" + this.usuarioPerfil.id,
+                  this.usuarioPerfil
+                )
+                .then((result) => {
+                  if (result.status === 200) {
+                    alert("Perfil atualizado");
+                  }
+                });
+            } else {
+              alert("Senha inválida");
+            }
+          } else {
+            alert("Email inválido");
+          }
+        } else {
+          alert("Nome inválido");
+        }
+      } else {
+        alert("Digite os dados nome, email ou senha corretamente!");
+      }
+    },
+  },
+  created: function () {
+    this.getUsuario();
+  },
 };
 </script>
 
@@ -60,7 +153,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  background: #dfdfdf;
+  background: #EBEBEB;
 
   /* align-items: center; */
 }
@@ -78,6 +171,11 @@ export default {
   outline-color: #840705;
   font-size: 15px;
   font-family: Helvetica, sans-serif, Arial;
+}
+
+.file_customizado {
+  margin-top: 15px;
+  /* width: 50; */
 }
 
 .form-perfil > label {
@@ -134,6 +232,8 @@ p:nth-child(2) {
 }
 
 .imageUser {
+  display: flex;
+  flex-direction: column;
   margin-top: 0%;
   border-radius: 100%;
   margin-bottom: 4%;
