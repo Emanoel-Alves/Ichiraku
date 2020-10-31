@@ -17,7 +17,7 @@
 
             <div class="Pedido" v-for="cesta in cestas " :key="cesta.id" > 
 
-                <img :src="'../uploads/produto/' + cesta.idPrato + '.png'" alt="" />
+                <img :src="'../uploads/produtos/' + cesta.idPrato + '.png'" alt="" />
 
                 <p> {{cesta.nomePrato}}</p>
   
