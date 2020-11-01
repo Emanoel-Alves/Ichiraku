@@ -120,9 +120,5 @@ public class Usuario {
 		return "Usuario [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", senha="
 				+ senha + ", cidade=" + cidade + ", bairro=" + bairro + ", rua=" + rua + ", numero=" + numero + ", imagem=" + imagem + "]";
 	}
-	
-	
-    
-	
-    
+ 
 }

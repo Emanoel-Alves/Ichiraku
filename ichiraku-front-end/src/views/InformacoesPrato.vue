@@ -10,8 +10,6 @@
      
       <div class="OpcaoPratos">
         <div class="Pratos">
-          <!-- <div v-if="prato.id == post.id "> -->
-          <!-- {{ prato.id }} -->
           <img :src="'../uploads/produtos/' + prato.id + '.png'" alt="" />
 
           <div>
@@ -23,7 +21,6 @@
 
               <h3>R$ {{ prato.preco }}</h3>
 
-              <!-- <a href=""> Adicionar a Cesta</a> -->
             </div>
 
             <input
