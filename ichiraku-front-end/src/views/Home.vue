@@ -28,6 +28,12 @@ export default {
     Menu,
   
   },
+  mounted() {
+   
+    if (!this.$session.exists()) {
+        this.$router.push("/login");
+    }   
+ },
 };
 </script>
 <style scoped>

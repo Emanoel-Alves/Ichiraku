@@ -45,7 +45,7 @@
 
       <div class="divLine"></div>
       <p>Endereço</p>
-      <label>Cidade: <input v-model="usuarioPerfil.id" /></label>
+      <label>Cidade: <input v-model="usuarioPerfil.cidade" /></label>
 
       <label
         >Bairro: <input v-model="usuarioPerfil.bairro" value="Betânia"
@@ -102,22 +102,24 @@ export default {
         console.log( this.usuarioPerfil.imagem);
       },
        handleFileUpload(id) {
-        this.file = this.$refs.file.files[0];
+       if(this.imagem){
+          this.file = this.$refs.file.files[0];
 
-        let form = new FormData();
-        form.append("resource", "usuarios");
-        form.append("id", id);
-        form.append("file", this.file);
+          let form = new FormData();
+          form.append("resource", "usuarios");
+          form.append("id", id);
+          form.append("file", this.file);
 
-        this.$http
-          .post(this.baseUploadURI, form, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((result) => {
-            console.log(result);
-          });
+          this.$http
+            .post(this.baseUploadURI, form, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((result) => {
+              console.log(result);
+            });
+        }
       },
     getUsuario() {
       this.usuario = JSON.parse(this.$session.get("usuario"));
@@ -134,9 +136,11 @@ export default {
         this.usuarioPerfil.senha.trim() !== ""
       ) {
         if (this.usuarioPerfil.nome.length > 4) {
-          if (this.usuarioPerfil.email.indexOf("@") != -1) {
+          if (this.usuarioPerfil.email.length > 0 && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.usuarioPerfil.email)) {
             if (this.usuarioPerfil.senha.length > 7) {
-               this.usuarioPerfil.imagem = this.imagem;
+               if(this.usuarioPerfil.imagem == false){
+                 this.usuarioPerfil.imagem = this.imagem;
+               }
               this.$http
                 .put(
                   this.baseURI + "/" + this.usuarioPerfil.id,

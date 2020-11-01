@@ -39,8 +39,6 @@
 
             <h5>Agradecemos a preferência </h5>
 
-            <!-- <a href="">Finalizar comprar</a> -->
-
             <input
                 @click="postPedido()"
                 value="Finalizar comprar"

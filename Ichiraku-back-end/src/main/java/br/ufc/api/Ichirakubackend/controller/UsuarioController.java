@@ -29,11 +29,6 @@ public class UsuarioController {
 		return new ResponseEntity<List<Usuario>>(usuarioService.getUsuarios(), HttpStatus.OK);
 	}
 
-//	@RequestMapping(method = RequestMethod.GET, value = "{id}")
-//	public ResponseEntity<Usuario> getUsuario(@PathVariable("id") Integer id) {
-//		return new ResponseEntity<Usuario>(usuarioService.getUsuario(id), HttpStatus.OK);
-//	}
-
 	@RequestMapping(method = RequestMethod.GET, value = "{id}")
 	public ResponseEntity<Usuario> getUsuario(@PathVariable("id") Integer id) {
 
@@ -51,11 +46,6 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>> getUsuarioByEmail(@RequestParam("email") String email) {
 		return new ResponseEntity<List<Usuario>>(usuarioService.getUsuarioByEmail(email), HttpStatus.OK);
 	}
-
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity<Usuario> addUsuario(@RequestBody Usuario usuario) {
-//        return new ResponseEntity<Usuario>(usuarioService.addUsuario(usuario.getNome(), usuario.getSobrenome(), usuario.getEmail(), usuario.getSenha(), usuario.getCidade(), usuario.getBairro(), usuario.getRua(), usuario.getNumero()), HttpStatus.OK);
-//    }
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Usuario> addUsuario(@RequestBody Usuario newUsuario) {
